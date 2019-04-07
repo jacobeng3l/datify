@@ -1,0 +1,13 @@
+sudo apt-get install mysql-server
+
+mkdir datify
+cd datify
+
+sudo apt install python-pip
+pip install configparser 
+sudo apt-get pyhton3 -venv
+python3 -m venv venv
+. venv/bin/activate
+pip install Flask
+pip install mysql-connector-python
+
