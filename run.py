@@ -47,10 +47,14 @@ def template_response_with_data():
 #        sql = "delete from book where id={book_id}".format(book_id=book_id)
 #        sql_execute(sql)
     template_data = {}
-    sql = "select song_id, name from song order by name"
+    sql = "select song_id, explicit, song.name, song.album_id, album.name, plays from song, album where song.album_id = album.album_id order by song.name"
     songs = sql_query(sql)
     template_data['songs'] = songs
-    return render_template('home-w-data.html', template_data=template_data)
+    if "login" in request.form:
+      return render_template('homepage.html', template_data=template_data)
+    if "library" in request.form:
+      return render_template('library.html', template_data=template_data)
+    return render_template('login_page.html', template_data=template_data)
 
 if __name__ == '__main__':
     app.run(**config['app'])
