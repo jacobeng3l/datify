@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Library</title>
         <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
             table {
                 border-collapse: collapse;
                 border-spacing: 0;
@@ -36,23 +37,38 @@
                     <th>Album</th>
                     <th>Artist</th>
                     <th>Plays</th>
+                    <th>Duration</th>
                 </tr>
                 <tr>
-		    {% for song in template_data['songs'] %}
-		    <th>N/A</th>
-		    {% if song[1] == 0 %}
+		        {% for song in template_data['songs'] %}
+		            <th>N/A</th>
+		            {% if song[1] == 0 %}
                     <th>No</th> <!-- not explicit -->
-		    {% else %}
-		    <th>Yes</th> <!-- explicit -->
-		    {% endif %}
+		            {% else %}
+		            <th>Yes</th> <!-- explicit -->
+		            {% endif %}
                     <th>{{ song[2] }}</th> <!-- song -->
                     <th>{{ song[4] }}</th> <!-- album -->
                     <th>N/A</th> <!-- artist -->
                     <th>{{ song[5] }}</th> <!-- plays -->
-		    {% endfor %}
+                    <th>{{ song[6] }}.toHHMMSS()</th> <!-- Duration -->
+		        {% endfor %}
                 </tr>
             </table>
             {% endif %}
         </form>
+        <script>
+                String.prototype.toHHMMSS = function () {
+                    var sec_num = parseInt(this, 10); // don't forget the second param
+                    var hours   = Math.floor(sec_num / 3600);
+                    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+                    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+                
+                    if (hours   < 10) {hours   = "0"+hours;}
+                    if (minutes < 10) {minutes = "0"+minutes;}
+                    if (seconds < 10) {seconds = "0"+seconds;}
+                    return hours+':'+minutes+':'+seconds;
+                }
+        </script>
 	</body>
 </html>
