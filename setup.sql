@@ -4,8 +4,8 @@
 
 -- create database and user, grant privileges to user
 create database datify;
-create user 'mysql_username'@'localhost' identified by 'mysql_password';
-grant all on web_database_project.* to 'mysql_username'@'localhost';
+create user 'mysql_username' identified by 'mysql_password';
+grant all on datify.* to 'mysql_username'@'localhost';
 flush privileges;
 
 -- select the database and create tables
