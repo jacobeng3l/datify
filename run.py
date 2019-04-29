@@ -1,5 +1,5 @@
 import configparser
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import mysql.connector
 
 # Read configuration from file.
@@ -7,7 +7,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 # Set up application server.
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # Create a function for fetching data from the database.
 def sql_query(sql):
@@ -28,17 +28,6 @@ def sql_execute(sql):
     cursor.close()
     db.close()
 
-# For this example you can select a handler function by
-# uncommenting one of the @app.route decorators.
-
-#@app.route('/')
-def basic_response():
-    return "It works!" #example
-
-#@app.route('/')
-def template_response():
-    return render_template('home.html')
-
 @app.route('/', methods=['GET', 'POST'])
 def template_response_with_data():
     print(request.form)
@@ -47,7 +36,7 @@ def template_response_with_data():
 #        sql = "delete from book where id={book_id}".format(book_id=book_id)
 #        sql_execute(sql)
     template_data = {}
-    sql = "select song_id, explicit, song.name, song.album_id, album.name, plays from song, album where song.album_id = album.album_id order by song.name"
+    sql = "select song_id, explicit, song.name, song.album_id, album.name, plays, duration, file_loc from song, album where song.album_id = album.album_id order by song.name"
     songs = sql_query(sql)
     template_data['songs'] = songs
     if "login" in request.form:
