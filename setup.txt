@@ -45,7 +45,9 @@ create table song(
     num int not null,
     file_loc varchar(255) not null,
     album_id int not null,
-    FOREIGN KEY (album_id) REFERENCES album(album_id)
+    artist_id int not null,
+    FOREIGN KEY (album_id) REFERENCES album(album_id),
+    FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
 create table artist(
