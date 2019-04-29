@@ -39,6 +39,8 @@ def template_response_with_data():
         print(sql)
         user = sql_query(sql)
         data['user'] = user
+        if not user:
+            return render_template('login_page.html')
         return render_template('homepage.html', data=data)
     if "delete-song" in request.form:
         delete_song_id = int(request.form["delete-song"])
