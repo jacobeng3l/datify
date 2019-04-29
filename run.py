@@ -36,6 +36,7 @@ def template_response_with_data():
         email = str(request.form["email"])
         password = str(request.form["psw"])
         sql = "select user_id from user where user.email={email} and user.password={password}".format(email=email, password=password)
+        print(sql)
         user = sql_query(sql)
         data['user'] = user
         return render_template('homepage.html', data=data)
