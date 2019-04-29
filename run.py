@@ -35,7 +35,7 @@ def template_response_with_data():
     if "login" in request.form:
         email = str(request.form["email"])
         password = str(request.form["psw"])
-        sql = "select user_id from user where user.email={email} and user.password={password}".format(email=email, password=password)
+        sql = "select user_id from user where user.email='{email}' and user.password='{password}'".format(email=email, password=password)
         print(sql)
         user = sql_query(sql)
         data['user'] = user
