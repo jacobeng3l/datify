@@ -28,6 +28,14 @@ create table playlist(
     plays int DEFAULT 0
 );
 
+create table album(
+    album_id int not null auto_increment primary key,
+    name varchar(255) not null,
+    date_published date,
+    image varchar(255),
+    description varchar(255)
+);
+
 create table song(
     song_id int not null auto_increment primary key,
     name varchar(255) not null,
@@ -38,14 +46,6 @@ create table song(
     file_loc varchar(255) not null,
     album_id int not null,
     FOREIGN KEY (album_id) REFERENCES album(album_id)
-);
-
-create table album(
-    album_id int not null auto_increment primary key,
-    name varchar(255) not null,
-    date_published date,
-    image varchar(255),
-    description varchar(255)
 );
 
 create table artist(
