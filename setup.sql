@@ -34,4 +34,7 @@ create table song(
 insert into album(album_id, name) values (1, 'The Click');
 insert into song(name, duration, num, file_loc, album_id) values 
     ('Sober Up', 218, 4, '/home', 1);
+insert into album(album_id, name) values (2, 'Youtube'); 
+insert into song(name, duration, num, file_loc, album_id) values 
+    ('Lament Golden Light', 216, 1, 'Lament_Golden_Light.mp3', 2);
 
