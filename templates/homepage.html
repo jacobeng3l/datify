@@ -58,13 +58,13 @@
 		<h1 style="text-align:center; font-size:100px;">Datify</h1>
 		<div align="center">
 			<form action="." method="post">
-				<button type="submit" style="width:auto" name="library"><span>Library</span></button>
+				<button type="submit" style="width:auto" name="library" value="{{ data['user'][0] }}"><span>Library</span></button>
 			</form>
 			<form action="." method="post">
-				<button type="submit" style="width:auto" name="playlists"><span>Playlists</span></button>
+				<button type="submit" style="width:auto" name="playlists" value="{{ data['user'][0] }}"><span>Playlists</span></button>
 			</form>
 			<form action="." method="post">
-				<button type="submit" style="width:auto" name="friends"><span>Friends</span></button>
+				<button type="submit" style="width:auto" name="friends" value="{{ data['user'][0] }}"><span>Friends</span></button>
 			</form>
 		</div>
 	</body>

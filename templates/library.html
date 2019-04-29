@@ -35,7 +35,7 @@
             }
 
             #library th:nth-child(1) {width: 5%;}
-            #library th:nth-child(2) {width: 10%;}
+            #library th:nth-child(2) {width: 5%;}
             #library th:nth-child(3) {width: 25%;}
             #library th:nth-child(4) {width: 25%;}
             #library th:nth-child(5) {width: 15%;}
@@ -56,7 +56,7 @@
             }
               
             /* Show the play button on row hover, and always show pause button */
-            #library tr:hover td button#play, #library tr td button#pause {
+            #library tr:hover td button#play, #library tr td button#pause, #library tr td button#saved {
                 background-color: transparent;
                 color: #0b304d;
                 /* margin: 8px 0; */
@@ -68,6 +68,11 @@
                 -webkit-transition-duration: 0.1s;
                 transition-duration: 0.1s;
                 opacity: 0.8
+            }
+
+            #library tr td button#saved {
+                font-size: 20px;
+                width: 30px;
             }
 
             /* Removes blue outline when play/pause button is selected */
@@ -114,14 +119,15 @@
             <table id="library">
                 <tr>
                     <th></th>
+                    <th></th>
+                    <th>Title</th>
                     <th>Explicit?</th>
-                    <th>Song</th>
-                    <th>Album</th>
                     <th>Artist</th>
+                    <th>Album</th>
                     <th>Plays</th>
                     <th>Duration</th>
                 </tr>
-                {% for song in template_data['songs'] %}
+                {% for song in data['songs'] %}
                 <tr>
                     <td style="text-align: center">
                         <audio id="audio" src="/static/{{ song[7] }}" type="audio/mpeg" ontimeupdate="updateBar(this)">
@@ -129,14 +135,17 @@
                         </audio>
                         <button onclick="togglePlayPause(this)" type="button" id="play" class='far fa-play-circle'></button>
                     </td>
+                    <td style="text-align: center">
+                        <button id="saved" name="delete-song" value="{{ song[0] }}" onclick="document.getElementById('table').refresh()" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
+                    </td>
+                    <td>{{ song[2] }}</td> <!-- song -->
 		            {% if song[1] == 0 %}
                     <td>No</td> <!-- not explicit -->
 		            {% else %}
 		            <td>Yes</td> <!-- explicit -->
-		            {% endif %}
-                    <td>{{ song[2] }}</td> <!-- song -->
-                    <td>{{ song[4] }}</td> <!-- album -->
+                    {% endif %}
                     <td>N/A</td> <!-- artist -->
+                    <td>{{ song[4] }}</td> <!-- album -->
                     <td>{{ song[5] }}</td> <!-- plays -->
                     <td id="duration">{{ song[6] }}</td> <!-- duration -->
                 </tr>
@@ -264,6 +273,10 @@
                 ret += "" + mins + ":" + (secs < 10 ? "0" : "");
                 ret += "" + secs;
                 return ret;
+            }
+
+            function toggleSave(button) {
+                button.className = 'fas fa-check' ? button.className = 'fas fa-times' : button.className = 'fas fa-check';
             }
         </script>
 	</body>
