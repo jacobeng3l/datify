@@ -1,2 +1,0 @@
-Test text file. 
-This is a second line added by the user. 
