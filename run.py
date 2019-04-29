@@ -59,7 +59,7 @@ def template_response_with_data():
         return render_template('playlists.html', data=data)
     if "friends" in request.form:
         return render_template('friends.html', data=data)
-    return render_template('login.html')
+    return render_template('login_page.html')
 
 if __name__ == '__main__':
     app.run(**config['app'])
