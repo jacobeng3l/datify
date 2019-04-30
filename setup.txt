@@ -102,7 +102,7 @@ insert into artist(artist_id, name) values
 insert into album(album_id, name) values 
     (1, '?');
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values 
-    (1, 'SAD!', 167, 4, '/home', 1
+    (1, 'SAD!', 167, 4, '/home', 1, 1);
 insert into user(user_id, email, name, password) values 
     (1, 'abc1@case.edu', 'Alex', 'password');
 insert into in_library(user_id, song_id) values
@@ -118,7 +118,7 @@ insert into album(album_id, name) values
 insert into arist(artist_id, name) values
     (2, 'George Washington');
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values 
-    (2, 'Lament Golden Light', 216, 1, 'Lament_Golden_Light.mp3', 2, );
+    (2, 'Lament Golden Light', 216, 1, 'Lament_Golden_Light.mp3', 2, 2);
 insert into in_library(user_id, song_id) values
     (1, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values 
