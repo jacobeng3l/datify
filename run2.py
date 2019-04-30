@@ -39,8 +39,7 @@ def redir():
 
 # Login page
 @app.route('/login', methods=['GET', 'POST'])
-def login():
-    #error = None
+def login(error):
     if request.method == 'POST':
         email = str(request.form["email"])
         password = str(request.form["psw"])
