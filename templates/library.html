@@ -113,7 +113,8 @@
         <h1>Library</h1>
 
         <form action="." method="post">
-            {% if template_data['songs']|length == 0 %}
+            <div name="user" value="{{ data['user'][0] }}"></div>
+            {% if data['songs']|length == 0 %}
             <p style="color: red">No songs saved!</p>
             {% else %}
             <table id="library">
