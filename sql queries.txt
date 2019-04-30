@@ -1,0 +1,28 @@
+
+#selecting songs in a given user's library
+Select s.id, s.name, s.plays, s.explicit, s.file_loc, s.album_id, s.duration, s.num
+From user u, song s, in_library l
+Where u.id = 'USER' and u.id = l.user_id and l.song_id = s.id
+
+#selecting playlists of a given user
+Select p.id, p.name, p.date_created, p.description, p.plays
+From playlist p, user u, has_playlist hp
+Where hp.user_id = 'USER' and hp.playlist_id = p.id
+
+#selecting all of the users that a given user follows
+Select u.name, u.email
+From user u, is_friend f
+Where f.follower = 'USER'
+
+
+
+
+
+
+
+
+
+
+
+
+
