@@ -113,7 +113,7 @@
         <h1>Library</h1>
 
         <form action="." method="post">
-            <div name="user" value="{{ data['user'][0] }}"></div>
+            <div name="user" value="{{ data['user'] }}"></div>
             {% if data['songs']|length == 0 %}
             <p style="color: red">No songs saved!</p>
             {% else %}
