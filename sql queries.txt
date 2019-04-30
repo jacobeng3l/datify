@@ -14,6 +14,21 @@ Select u.user_id, u.name, u.email, u.password, u.date_of_birth
 From user u, is_friend f
 Where f.follower = 'USER'
 
+#search query for Songs
+Select s.song_id, s.name, s.plays, s.explicit, s.file_loc, s.album_id, s.duration, s.num
+From song s
+where s.name like '%SEARCH%' 
+
+#search query for albums
+Select s.song_id, s.name, s.plays, s.explicit, s.file_loc, s.album_id, s.duration, s.num
+From song s, album a
+where a.name like '%SEARCH%' ^ s.album_id = a.album_id
+
+#search query for artists
+Select s.song_id, s.name, s.plays, s.explicit, s.file_loc, s.album_id, s.duration, s.num
+From song s, artist a
+where a.name like '%SEARCH%' ^ a.artist_id = s.artist_id
+
 
 
 
