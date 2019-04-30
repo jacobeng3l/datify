@@ -124,7 +124,7 @@ def search():
     data = {}
     data['query'] = str(request.form['search'])
     # sql query to return search results
-    sql = "select song.name from song limit 20"
+    sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id order by song.name"
     results = sql_query(sql)
     data['results'] = results
     return render_template('search.html', data=data)
