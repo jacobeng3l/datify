@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Home</title>
+		<style>
+			body {font-family: Arial, Helvetica, sans-serif;}
+
+			/* Set a style for all buttons */
+			button {
+				background-color: #0B304D;
+				color: white;
+				padding: 14px 20px;
+				margin: 8px 0;
+				border: none;
+				cursor: pointer;
+				width: 100%;
+				border-radius: 4px;
+				transition: all 0.5s;
+				display: inline-block;
+				font-size: 14px
+			}
+
+			button span {
+				cursor: pointer;
+				display: inline-block;
+				position: relative;
+				transition: 0.5s;
+			}
+
+			button span:after {
+				content: '\279c';
+				font-size: 20px;
+				position: absolute;
+				opacity: 0;
+				top: -6px;
+				right: -50px;
+				transition: 0.5s;
+			}
+
+			button:hover span {
+				padding-right: 32px;
+			}
+
+			button:hover span:after {
+				opacity: 1;
+				right: 0;
+			}
+
+			button:hover {
+				opacity: 0.8;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 style="text-align:center; font-size:100px;">Datify</h1>
+		<div align="center">
+			<form action="." method="post">
+				<button type="submit" style="width:auto" name="library"><span>Library</span></button>
+			</form>
+			<form action="." method="post">
+				<button type="submit" style="width:auto" name="playlists"><span>Playlists</span></button>
+			</form>
+			<form action="." method="post">
+				<button type="submit" style="width:auto" name="friends"><span>Friends</span></button>
+			</form>
+		</div>
+	</body>
+</html>
+
+<!-- use the following for value field in buttons of run2.py doesn't work -->
+<!--value="{{ data['user'] }}"-->
