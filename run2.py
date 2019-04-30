@@ -35,7 +35,7 @@ def sql_execute(sql):
 @app.route('/')
 def redir():
     error = None
-    return redirect(url_for('login/<error>', error=error))
+    return redirect(url_for('login', error=error))
 
 # Login page
 @app.route('/login/<error>', methods=['GET', 'POST'])
@@ -58,7 +58,7 @@ def login(error):
 def homepage():
     if 'user_id' not in session:
         error = 'You are not logged in.'
-        return redirect(url_for('login/<error>', error=error))
+        return redirect(url_for('login', error=error))
     if request.method == 'POST':
         if "library" in request.form:
             return redirect(url_for('library'))
@@ -73,7 +73,7 @@ def homepage():
 def library():
     if 'user_id' not in session:
         error = 'You are not logged in.'
-        return redirect(url_for('login/<error>', error=error))
+        return redirect(url_for('login', error=error))
     data = {}
     if "delete-song" in request.form:
         delete_song_id = int(request.form["delete-song"])
@@ -91,7 +91,7 @@ def library():
 def playlists():
     if 'user_id' not in session:
         error = 'You are not logged in.'
-        return redirect(url_for('login/<error>', error=error))
+        return redirect(url_for('login', error=error))
     data = {}
     # sql query to return playlists of a specific user
     ## wrong current sql query ##
@@ -105,7 +105,7 @@ def playlists():
 def friends():
     if 'user_id' not in session:
         error = 'You are not logged in.'
-        return redirect(url_for('login/<error>', error=error))
+        return redirect(url_for('login', error=error))
     data = {}
     # sql query to return friends of a user
     ## wrong current sql query ##
