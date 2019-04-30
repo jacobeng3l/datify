@@ -115,7 +115,6 @@
         <h1>Library</h1>
 
         <form action="." method="post">
-            <!--<input type="hidden" name="user" value="{{ data['user'] }}">-->
             {% if data['songs']|length == 0 %}
             <p style="color: red">No songs saved!</p>
             {% else %}
@@ -142,11 +141,7 @@
                         <button id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
                     </td>
                     <td>{{ song[2] }}</td> <!-- song -->
-		            {% if song[1] == 0 %}
-                    <td>No</td> <!-- not explicit -->
-		            {% else %}
-		            <td>Yes</td> <!-- explicit -->
-                    {% endif %}
+                    <td>{{ song[1] }}</td> <!-- explicit -->
                     <td>{{ song[8] }}</td> <!-- artist -->
                     <td>{{ song[4] }}</td> <!-- album -->
                     <td>{{ song[5] }}</td> <!-- plays -->
