@@ -23,7 +23,7 @@ create table user(
 create table playlist(
     playlist_id int not null auto_increment primary key,
     name varchar(255) not null,
-    date_created date DEFAULT now(),
+    date_created date,
     description varchar(255),
     plays int DEFAULT 0
 );
@@ -34,6 +34,15 @@ create table album(
     date_published date,
     image varchar(255),
     description varchar(255)
+);
+
+create table artist(
+    artist_id int not null auto_increment primary key,
+    name varchar(255) not null,
+    age int,
+    image varchar(255),
+    bio varchar(255),
+    plays int DEFAULT 0
 );
 
 create table song(
@@ -50,15 +59,6 @@ create table song(
     FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
-create table artist(
-    artist_id int not null auto_increment primary key,
-    name varchar(255) not null,
-    age int,
-    image varchar(255),
-    bio varchar(255),
-    plays int DEFAULT 0
-);
-
 create table is_friend(
     follower int not null,
     following int not null,
@@ -70,7 +70,7 @@ create table is_friend(
 create table in_library(
     user_id int not null,
     song_id int not null,
-    date_added date DEFAULT now(),
+    date_added date,
     plays int DEFAULT 0,
     PRIMARY KEY (user_id,song_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
@@ -88,7 +88,7 @@ create table has_playlist(
 create table in_playlist(
     playlist_id int not null,
     song_id int not null,
-    date_added date DEFAULT now(),
+    date_added date,
     added_by int not null,
     PRIMARY KEY (playlist_id,song_id),
     FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id),
