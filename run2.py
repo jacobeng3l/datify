@@ -34,7 +34,7 @@ def sql_execute(sql):
 # Redirect default URL to the login page
 @app.route('/')
 def redir():
-    error = ''
+    error = None
     return redirect(url_for('login', error=error))
 
 # Login page
