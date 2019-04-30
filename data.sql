@@ -1,9 +1,9 @@
 insert into user(user_id, email, name, password) values 
   (2, 'abc2@case.edu', 'Jacob', '2');
 insert into user(user_id, email, name, password) values 
-  (2, 'abc3@case.edu', 'Jason', '3');
+  (3, 'abc3@case.edu', 'Jason', '3');
 insert into user(user_id, email, name, password) values 
-  (2, 'abc4@case.edu', 'Jordan', '4');
+  (4, 'abc4@case.edu', 'Jordan', '4');
 
 insert into artist(artist_id, name) values
   (4, 'Kanye West');
