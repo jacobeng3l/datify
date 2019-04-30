@@ -115,5 +115,18 @@ def friends():
     data['friends'] = friends
     return render_template('friends.html', data=data)
 
+# Search page
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if 'user_id' not in session:
+        error = 'You are not logged in.'
+        return redirect(url_for('login', error=error))
+    data = {}
+    # sql query to return search results
+    sql = ""
+    results = sql_query(sql)
+    data['search'] = results
+    return render_template('search.html', data=data)
+
 if __name__ == '__main__':
     app.run(**config['app'])
