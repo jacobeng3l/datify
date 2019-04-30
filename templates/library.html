@@ -115,6 +115,7 @@
         <h1>Library</h1>
 
         <form action="." method="post">
+            <input type="hidden" name="user" value="{{ data['user'] }}">
             {% if data['songs']|length == 0 %}
             <p style="color: red">No songs saved!</p>
             {% else %}
@@ -138,7 +139,6 @@
                         <button onclick="togglePlayPause(this)" type="button" id="play" class='far fa-play-circle'></button>
                     </td>
                     <td style="text-align: center">
-                        <input type="hidden" name="user" value="{{ data['user'] }}">
                         <button id="saved" name="delete-song" value="{{ song[0] }}" onclick="document.getElementById('table').refresh()" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
                     </td>
                     <td>{{ song[2] }}</td> <!-- song -->
