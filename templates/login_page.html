@@ -163,7 +163,7 @@
       <form action="{{ url_for('login') }}" class="modal-content animate" method="post">
         <div class="imgcontainer">
           {% if error %}
-          <p class="error"><strong>Error:</strong> {{ error }}</p>
+          <p class="error" style="color: red"><strong>Error:</strong> {{ error }}</p>
           {% endif %}
           <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
         </div>
