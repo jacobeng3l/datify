@@ -360,6 +360,8 @@ insert into in_library(user_id, song_id) values
 insert into in_library(user_id, song_id) values
   (4, 8);
 insert into in_library(user_id, song_id) values
+  (4, 9);
+insert into in_library(user_id, song_id) values
   (4, 10);
 insert into in_library(user_id, song_id) values
   (4, 11);
