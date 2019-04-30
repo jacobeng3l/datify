@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <!-- KEEP IN MIND THIS MESSES EVERYTHING UP FOR A STUPID PROGRESS BAR -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Library</title>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* Table styling */
+            #library {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                text-align: left;
+                table-layout: fixed;
+            }
+            
+            /* All rows styling */
+            #library td, #library th {
+                border-bottom: 2px solid #ddd;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding: 3px 15px 3px 15px;
+            }
+
+            /* Table header row styling */
+            #library th {
+                background-color: #0B304D;
+                color: white;
+            }
+
+            #library th:nth-child(1) {width: 5%;}
+            #library th:nth-child(2) {width: 5%;}
+            #library th:nth-child(3) {width: 25%;}
+            #library th:nth-child(4) {width: 5%;}
+            #library th:nth-child(5) {width: 20%;}
+            #library th:nth-child(6) {width: 20%;}
+            #library th:nth-child(7) {width: 10%;}
+            #library th:nth-child(8) {width: 10%;}
+            
+
+            /* Non-header row styling */
+            #library td, #library td#duration {
+                height: 40px;
+            }
+              
+            /* Zebra table effect */
+            #library tr:nth-child(even){background-color: #f2f2f2;}
+
+            /* Change color on row hover */
+            #library tr:hover td {
+                background-color: #ddd;
+            }
+              
+            /* Show the play button on row hover, and always show pause button */
+            #library tr:hover td button#play, #library tr td button#pause, #library tr td button#saved {
+                background-color: transparent;
+                color: #0b304d;
+                /* margin: 8px 0; */
+                border: none;
+                width: auto;
+                text-align: center;
+                display: inline-block;
+                font-size: 27px;
+                -webkit-transition-duration: 0.1s;
+                transition-duration: 0.1s;
+                opacity: 0.8
+            }
+
+            #library tr td button#saved {
+                font-size: 20px;
+                width: 30px;
+            }
+
+            /* Removes blue outline when play/pause button is selected */
+            button:focus {outline:0}
+
+            /* Transition animation on hover over button */
+            #library tr:hover td button#play:hover, #library tr td button#pause:hover {
+                transform: scale(1.1);
+                opacity: 1.0;
+            }
+
+            /* Transition animation on button click */
+            #library tr:hover td button#play:active, #library tr td button#pause:active {
+                transform: scale(0.9);
+                opacity: 0.6;
+            }
+
+            /* Don't show play button when not on row hover */
+            #library tr td button#play {
+                display: none;
+            }
+
+            .navbar {
+                background-color: #0b304d;
+                overflow: hidden;
+                position: fixed;
+                bottom: 0;
+                width: 100%;                
+            }
+
+            .timebar {
+                padding: 15px 15px 15px 15px;
+            }
+            
+        </style>
+	</head>
+	<body>
+        <h1>Library</h1>
+
+        <form action="." method="post">
+            {% if data['songs']|length == 0 %}
+            <p style="color: red">No songs saved!</p>
+            {% else %}
+            <table id="library">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Explicit?</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                    <th>Plays</th>
+                    <th>Duration</th>
+                </tr>
+                {% for song in data['songs'] %}
+                <tr>
+                    <td style="text-align: center">
+                        <audio id="audio" src="/static/{{ song[7] }}" type="audio/mpeg" ontimeupdate="updateBar(this)">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <button onclick="togglePlayPause(this)" type="button" id="play" class='far fa-play-circle'></button>
+                    </td>
+                    <td style="text-align: center">
+                        <input type="hidden" name="user" value="{{ data['user'] }}">
+                        <button id="saved" name="delete-song" value="{{ song[0] }}" onclick="document.getElementById('table').refresh()" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
+                    </td>
+                    <td>{{ song[2] }}</td> <!-- song -->
+		            {% if song[1] == 0 %}
+                    <td>No</td> <!-- not explicit -->
+		            {% else %}
+		            <td>Yes</td> <!-- explicit -->
+                    {% endif %}
+                    <td>N/A</td> <!-- artist -->
+                    <td>{{ song[4] }}</td> <!-- album -->
+                    <td>{{ song[5] }}</td> <!-- plays -->
+                    <td id="duration">{{ song[6] }}</td> <!-- duration -->
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </form>
+
+        <!-- really crappy progress bar implementation -->
+        <div class="navbar">
+            <div class="timebar" style="text-align:center">
+                <div class="w3-light-grey w3-round-xlarge" style="width:50%">
+                    <div class="w3-blue w3-round-xlarge" id="progressBar" style="width:0; height:10px"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            class Queue {
+                constructor() {
+                    this.items = [];
+                }
+
+                enqueue(element) {
+                    this.items.push(element);
+                }
+
+                dequeue() {
+                    if (this.isEmpty())
+                        return "Underflow";
+                    return this.items.shift();
+                }
+
+                isEmpty() {
+                    return this.items.length == 0;
+                }
+            }
+
+            var songQueue = new Queue();
+            var buttonQueue = new Queue();
+            var songs = document.querySelectorAll('#audio');
+            var buttons = document.querySelectorAll('#play');
+            var a = document.getElementById("play");
+            var lastSongIndex = -1;
+            
+            function togglePlayPause(button) {
+                var currentSongIndex;
+                for (var i = 0; i < buttons.length; i++) {
+                    if (buttons[i] == button) {
+                        currentSongIndex = i;
+                    }
+                }
+                if (button.className == 'far fa-play-circle') {
+                    button.className = 'far fa-pause-circle';
+                    button.id = 'pause';
+                    if (!songQueue.isEmpty()) {
+                        var prevSong = songQueue.dequeue();
+                        prevSong.pause();
+                        var prevButton = buttonQueue.dequeue();
+                        prevButton.className = 'far fa-play-circle';
+                        prevButton.id = 'play';
+                    }
+                    // if it's not the same song that was playing, restart it
+                    if (lastSongIndex !== currentSongIndex) {
+                        // both might work *testing*
+                        songs[currentSongIndex].currentTime = "0";
+                        //songs[currentSongIndex].load();
+                    }
+                    var promise = songs[currentSongIndex].play();
+                    if (promise !== undefined) {
+                        promise.then(_ => {
+                            // Autoplay started!
+                        }).catch(error => {
+                            // Autoplay was prevented.
+                        });
+                    }
+
+                    lastSongIndex = currentSongIndex;
+                    songQueue.enqueue(songs[currentSongIndex]);
+                    buttonQueue.enqueue(button);
+                    songs[currentSongIndex].addEventListener('ended', function() {
+                        songQueue.dequeue();
+                        var prevButton = buttonQueue.dequeue();
+                        prevButton.className = 'far fa-play-circle';
+                        prevButton.id = 'play';
+                    });
+                } else {
+                    songs[currentSongIndex].pause();
+                    songQueue.dequeue();
+                    buttonQueue.dequeue();
+                    button.className = 'far fa-play-circle';
+                    button.id = 'play';
+                }
+                
+            }
+
+            function updateBar(audio) {
+                var bar = document.getElementById("progressBar");
+                var currentTime = audio.currentTime;
+                var duration = audio.duration;
+                var percentage = currentTime / duration * 100;
+                bar.style.width = percentage + '%';
+            }
+
+            var durations = document.querySelectorAll("#duration");
+            for (var i = 0; i < durations.length; i++) {
+                durations[i].innerHTML = timeFormat(durations[i].innerHTML);
+            }
+
+            function timeFormat(time)
+            {   
+                // Hours, minutes and seconds
+                var hrs = ~~(time / 3600);
+                var mins = ~~((time % 3600) / 60);
+                var secs = ~~time % 60;
+
+                // Output like "1:01" or "4:03:59" or "123:03:59"
+                var ret = "";
+
+                if (hrs > 0) {
+                    ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+                }
+
+                ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+                ret += "" + secs;
+                return ret;
+            }
+
+            function toggleSave(button) {
+                button.className = 'fas fa-check' ? button.className = 'fas fa-times' : button.className = 'fas fa-check';
+            }
+        </script>
+	</body>
+</html>
