@@ -38,8 +38,8 @@ def template_response_with_data():
         # sql query to obtain user_id of an email/psw from login attempt
         sql = "select user_id from user where user.email='{email}' and user.password='{password}'".format(email=email, password=password)
         user = sql_query(sql)
-        print(user)
-        data['user'] = user
+        print(user[0])
+        data['user'] = user[0]
         # on failed login attempt, return back to the login page, otherwise go to home page
         if not user:
             return render_template('login_page.html')
