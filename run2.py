@@ -38,6 +38,7 @@ def redir():
     return redirect(url_for('login', error=error))
 
 # Login page
+@app.route('/login', defaults={'error': None}, methods=['GET', 'POST'])
 @app.route('/login/<error>', methods=['GET', 'POST'])
 def login(error):
     if request.method == 'POST':
