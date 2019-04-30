@@ -160,19 +160,22 @@
     </div>
 
     <div id="id01" class="modal">
-      <form class="modal-content animate" method="post">
+      <form action="." class="modal-content animate" method="post">
         <div class="imgcontainer">
+          {% if not error == '' %}
+          <p class="error"><strong>Error:</strong> {{ error }}</p>
+          {% endif %}
           <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
         </div>
 
         <div class="container">
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required>
+          <input type="text" placeholder="Enter Email" name="email" value="{{ request.form.email }}" required>
 
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
+          <input type="password" placeholder="Enter Password" name="psw" value="{{ request.form.psw }}" required>
             
-          <button type="submit" name="login"><span>Login</span></button>
+          <button type="submit"><span>Login</span></button>
           <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
           </label>
