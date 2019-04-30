@@ -122,10 +122,11 @@ def search():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    data['query'] = str(request.form['search'])
     # sql query to return search results
-    sql = ""
+    sql = "select song.name from songs limit 20"
     results = sql_query(sql)
-    data['search'] = results
+    data['results'] = results
     return render_template('search.html', data=data)
 
 if __name__ == '__main__':
