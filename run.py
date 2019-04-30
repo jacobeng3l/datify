@@ -49,7 +49,7 @@ def template_response_with_data():
         # sql query for deleting a song in a user's library
         sql = "delete from in_library where user_id={user_id} and song_id={delete_song_id}".format(user_id=user_id, delete_song_id=delete_song_id)
         sql_execute(sql)
-        sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc from song, album, in_library, user where song.album_id=album.album_id and user.user_id={user_id} and user.user_id=in_library.user_id and in_library.song_id = song.song_id order by song.name".format(user_id=user_id)
+        sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, in_library, user, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and user.user_id={user_id} and user.user_id=in_library.user_id and in_library.song_id = song.song_id order by song.name".format(user_id=user_id)
         songs = sql_query(sql)
         data['songs'] = songs
         data['user'] = user_id
@@ -59,7 +59,7 @@ def template_response_with_data():
         user_id = int(request.form["library"])
         # sql query to return all songs a user has in their library
         ## wrong current sql query ##
-        sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc from song, album, in_library, user where song.album_id=album.album_id and user.user_id={user_id} and user.user_id=in_library.user_id and in_library.song_id = song.song_id order by song.name".format(user_id=user_id)
+        sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, in_library, user, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and user.user_id={user_id} and user.user_id=in_library.user_id and in_library.song_id = song.song_id order by song.name".format(user_id=user_id)
         songs = sql_query(sql)
         data['songs'] = songs
         data['user'] = user_id
