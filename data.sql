@@ -89,8 +89,6 @@ insert into album(album_id, name) values
   (7, 'Night Visions');
   
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
-  (35, 'Radioactive', 216, 1, '/home', 7, 5);
-insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (36, 'Tiptoe', 216, 2, '/home', 7, 5);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (37, 'It\'s Time', 216, 3, '/home', 7, 5);
