@@ -162,7 +162,7 @@
     <div id="id01" class="modal">
       <form action="." class="modal-content animate" method="post">
         <div class="imgcontainer">
-          {% if not error == '' %}
+          {% if error %}
           <p class="error"><strong>Error:</strong> {{ error }}</p>
           {% endif %}
           <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
