@@ -139,7 +139,7 @@
                         <button onclick="togglePlayPause(this)" type="button" id="play" class='far fa-play-circle'></button>
                     </td>
                     <td style="text-align: center">
-                        <button id="saved" name="delete-song" value="{{ song[0] }}" onclick="document.getElementById('table').refresh()" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
+                        <button id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
                     </td>
                     <td>{{ song[2] }}</td> <!-- song -->
 		            {% if song[1] == 0 %}
@@ -276,10 +276,6 @@
                 ret += "" + mins + ":" + (secs < 10 ? "0" : "");
                 ret += "" + secs;
                 return ret;
-            }
-
-            function toggleSave(button) {
-                button.className = 'fas fa-check' ? button.className = 'fas fa-times' : button.className = 'fas fa-check';
             }
         </script>
 	</body>
