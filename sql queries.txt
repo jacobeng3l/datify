@@ -10,7 +10,7 @@ From playlist p, user u, has_playlist hp
 Where hp.user_id = 'USER' and hp.playlist_id = p.id
 
 #selecting all of the users that a given user follows
-Select u.name, u.email
+Select u.user_id, u.name, u.email, u.password, u.date_of_birth
 From user u, is_friend f
 Where f.follower = 'USER'
 
