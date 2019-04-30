@@ -72,7 +72,7 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (30, 'Yikes', 289, 2, '/home', 6, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
-  (31, All Mine', 341, 3, '/home', 6, 4);
+  (31, 'All Mine', 341, 3, '/home', 6, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (32, 'Wouldn\'t leave', 270, 4, '/home', 6, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
