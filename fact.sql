@@ -5,10 +5,10 @@ create table plays(
   next_song_id int, 
   times date not null, 
   PRIMARY KEY (user_id, current_song_id, times), 
-  FOREIGN KEY (user_id) FROM user(user_id), 
-  FOREIGN KEY (current_song_id) FROM song(song_id), 
-  FOREIGN KEY (previous_song_id) FROM song(song_id), 
-  FOREIGN KEY (next_song_id) FROM song(song_id)
+  FOREIGN KEY (user_id) REFERENCES user(user_id), 
+  FOREIGN KEY (current_song_id) REFERENCES song(song_id), 
+  FOREIGN KEY (previous_song_id) REFERENCES song(song_id), 
+  FOREIGN KEY (next_song_id) REFERENCES song(song_id)
 );
 
 -- insert into plays (user_id, current_song_id, time)
