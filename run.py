@@ -37,7 +37,8 @@ def template_response_with_data():
         password = str(request.form["psw"])
         # sql query to obtain user_id of an email/psw from login attempt
         sql = "select user_id from user where user.email='{email}' and user.password='{password}'".format(email=email, password=password)
-        user = int(sql_query(sql))
+        user = sql_query(sql)
+        print(user)
         data['user'] = user
         # on failed login attempt, return back to the login page, otherwise go to home page
         if not user:
