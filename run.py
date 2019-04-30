@@ -47,7 +47,7 @@ def template_response_with_data():
         user_id = int(request.form["user"])
         delete_song_id = int(request.form["delete-song"])
         # sql query for deleting a song in a user's library
-        sql = "delete from in_library where user_id={user_id} and song.song_id={delete_song_id}".format(user_id=user_id, delete_song_id=delete_song_id)
+        sql = "delete from in_library where user_id={user_id} and song_id={delete_song_id}".format(user_id=user_id, delete_song_id=delete_song_id)
         sql_execute(sql)
     if "library" in request.form:
         user_id = int(request.form["library"])
@@ -57,6 +57,7 @@ def template_response_with_data():
         songs = sql_query(sql)
         data['songs'] = songs
         data['user'] = user_id
+        print(data['user'])
         return render_template('library.html', data=data)
     if "playlists" in request.form:
         user_id = int(request.form["playlists"])
