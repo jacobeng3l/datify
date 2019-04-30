@@ -38,8 +38,7 @@ def template_response_with_data():
         # sql query to obtain user_id of an email/psw from login attempt
         sql = "select user_id from user where user.email='{email}' and user.password='{password}'".format(email=email, password=password)
         user = sql_query(sql)
-        print(user[0])
-        data['user'] = user[0]
+        data['user'] = user[0][0]
         # on failed login attempt, return back to the login page, otherwise go to home page
         if not user:
             return render_template('login_page.html')
@@ -53,6 +52,7 @@ def template_response_with_data():
     if "library" in request.form:
         user_id = int(request.form["library"])
         # sql query to return all songs a user has in their library
+        ## wrong current sql query ##
         sql = "select song_id, explicit, song.name, song.album_id, album.name, plays, duration, file_loc from song, album where song.album_id = album.album_id order by song.name"
         songs = sql_query(sql)
         data['songs'] = songs
@@ -61,6 +61,7 @@ def template_response_with_data():
     if "playlists" in request.form:
         user_id = int(request.form["playlists"])
         # sql query to return playlists of a specific user
+        ## wrong current sql query ##
         sql = "select song_id, explicit, song.name, song.album_id, album.name, plays, duration, file_loc from song, album where song.album_id = album.album_id order by song.name"
         songs = sql_query(sql)
         data['songs'] = songs
