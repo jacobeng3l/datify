@@ -16,6 +16,7 @@
 
 use team_8;
 
+-- creates a user entity
 create table user(
     user_id int not null auto_increment primary key,
     email varchar(255) not null,
@@ -24,6 +25,7 @@ create table user(
     date_of_birth date
 );
 
+-- creates a playlist entity
 create table playlist(
     playlist_id int not null auto_increment primary key,
     user_id int not null, 
@@ -34,6 +36,7 @@ create table playlist(
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
+-- creates an album entity
 create table album(
     album_id int not null auto_increment primary key,
     name varchar(255) not null,
@@ -42,6 +45,7 @@ create table album(
     description varchar(255)
 );
 
+-- creates an artist entity
 create table artist(
     artist_id int not null auto_increment primary key,
     name varchar(255) not null,
@@ -51,6 +55,7 @@ create table artist(
     plays int DEFAULT 0
 );
 
+-- creates a song entity
 create table song(
     song_id int not null auto_increment primary key,
     name varchar(255) not null,
@@ -65,6 +70,7 @@ create table song(
     FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
+-- creates a 1-way relationship from the following to the folllower
 create table is_friend(
     follower int not null,
     following int not null,
@@ -73,6 +79,7 @@ create table is_friend(
     FOREIGN KEY (following) REFERENCES user(user_id)
 );
 
+-- creates a relationship between songs and users, so adds songs to a given library
 create table in_library(
     user_id int not null,
     song_id int not null,
@@ -91,6 +98,7 @@ create table in_library(
 --     FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id)
 -- );
 
+-- creates a relationship between playlists and songs, so adds songs to a playlist
 create table in_playlist(
     playlist_id int not null,
     song_id int not null,
@@ -102,6 +110,7 @@ create table in_playlist(
     FOREIGN KEY (added_by) REFERENCES user(user_id)
 );
 
+-- a fact table for user's song plays
 create table plays(
   user_id int not null,
   current_song_id int not null,
