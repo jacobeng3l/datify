@@ -76,6 +76,10 @@ def library():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    if "played-song" in request.form:
+        played_song_id = int(request.form['played-song'])
+        sql = "update song set song.plays = song.plays + 1 where song.song_id={played_song_id}".format(played_song_id=played_song_id)
+        sql_execute(sql)
     if "delete-song" in request.form:
         delete_song_id = int(request.form["delete-song"])
         # sql query for deleting a song in a user's library
@@ -122,6 +126,10 @@ def search():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    if "played-song" in request.form:
+        played_song_id = int(request.form['played-song'])
+        sql = "update song set song.plays = song.plays + 1 where song.song_id={played_song_id}".format(played_song_id=played_song_id)
+        sql_execute(sql)
     if "add-song" in request.form:
         add_song_id = int(request.form["add-song"])
         # sql query for adding a song to a user's library
