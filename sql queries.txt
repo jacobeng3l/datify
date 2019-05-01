@@ -41,6 +41,10 @@ values ('USER','SONG')
 insert into is_friend(follower, folowing)
 values ('USER', 'FRIEND')
 
+#inserting a playlist
+insert into has_playlist(user_id, playlist_id)
+values('USER','PLAYLIST')
+
 
 
 
