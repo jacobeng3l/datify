@@ -131,6 +131,7 @@ def search():
     if "items" in request.form:
         print(request.form["items"])
         for song_id in request.form["items"]:
+            print(song_id)
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
     if "add-song" in request.form:
