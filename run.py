@@ -130,17 +130,12 @@ def search():
     if "items" in request.form:
         for song_id in request.form["items"].split(','):
             print(song_id)
-            sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
+            sql = "update song set song.plays=song.plays+1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
     if "add-song" in request.form:
         add_song_id = int(request.form["add-song"])
         # sql query for adding a song to a user's library
-        sql = "insert into in_library(user_id, song_id) values ({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
-        sql_execute(sql)
-    if "delete-song" in request.form:
-        delete_song_id = int(request.form["delete-song"])
-        # sql query for deleting a song in a user's library
-        sql = "delete from in_library where user_id={user_id} and song_id={delete_song_id}".format(user_id=session['user_id'], delete_song_id=delete_song_id)
+        sql = "insert into in_library(user_id, song_id) values({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
         sql_execute(sql)
     data['query'] = str(request.form['search'])
     # sql query to return search results
