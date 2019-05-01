@@ -192,7 +192,6 @@
             </div>
         </div>
 
-        <form action="{{ url_for('search') }}" method="post">
             {% if data['results']|length == 0 %}
             <p style="color: red">No search results!</p>
             {% else %}
@@ -214,13 +213,21 @@
                         <audio id="audio" src="/static/{{ song[7] }}" type="audio/mpeg" ontimeupdate="updateBar(this)">
                             Your browser does not support the audio element.
                         </audio>
-                        <button onclick="togglePlayPause(this)" type="button" id="play" class='far fa-play-circle'></button>
+                        <form action="{{ url_for('search') }}" method="post">
+                        <button onclick="togglePlayPause(this)" name="played-song" value="{{ song[0] }}" type="button" id="play" class='far fa-play-circle'></button>
+                        </form>
                     </td>
                     <td style="text-align: center">
+                        <form action="{{ url_for('search') }}" method="post">
                         <button id="saved" name="add-song" value="{{ song[0] }}" class='fas fa-plus' onclick="toggleSave(this)"></button>
+                        </form>
                     </td>
                     <td>{{ song[2] }}</td> <!-- song -->
-                    <td>{{ song[1] }}</td> <!-- explicit -->
+                    {% if song[1] == 'Yes' %}
+                    <td><img src="https://i.stack.imgur.com/tkB9m.png"></td> <!-- explicit -->
+                    {% else %}
+                    <td></td> <!-- not explicit -->
+                    {% endif %}
                     <td>{{ song[8] }}</td> <!-- artist -->
                     <td>{{ song[4] }}</td> <!-- album -->
                     <td>{{ song[5] }}</td> <!-- plays -->
