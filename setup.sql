@@ -22,10 +22,12 @@ create table user(
 
 create table playlist(
     playlist_id int not null auto_increment primary key,
+    user_id int not null, 
     name varchar(255) not null,
     date_created date,
     description varchar(255),
-    plays int DEFAULT 0
+    plays int DEFAULT 0, 
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
 create table album(
@@ -77,13 +79,13 @@ create table in_library(
     FOREIGN KEY (song_id) REFERENCES song(song_id)
 );
 
-create table has_playlist(
-    user_id int not null,
-    playlist_id int not null,
-    PRIMARY KEY (user_id,playlist_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id)
-);
+-- create table has_playlist(
+--     user_id int not null,
+--     playlist_id int not null,
+--     PRIMARY KEY (user_id,playlist_id),
+--     FOREIGN KEY (user_id) REFERENCES user(user_id),
+--     FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id)
+-- );
 
 create table in_playlist(
     playlist_id int not null,
