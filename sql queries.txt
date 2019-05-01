@@ -37,6 +37,10 @@ values ('PLAYLIST','SONG','USER')
 insert into in_library (user_id, song_id)
 values ('USER','SONG')
 
+#following someone
+insert into is_friend(follower, folowing)
+values ('USER', 'FRIEND')
+
 
 
 
