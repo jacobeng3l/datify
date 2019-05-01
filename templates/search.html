@@ -43,7 +43,6 @@
             #library th:nth-child(7) {width: 10%;}
             #library th:nth-child(8) {width: 10%;}
             
-
             /* Non-header row styling */
             #library td, #library td#duration {
                 height: 40px;
@@ -178,7 +177,6 @@
                   border: 1px solid #ccc;  
                 }
             }
-            
         </style>
 	</head>
 	<body>
@@ -195,7 +193,6 @@
                 </form>
             </div>
         </div>
-        
         {% if data['results']|length == 0 %}
         <p style="color: red">No search results!</p>
         {% else %}
@@ -247,8 +244,7 @@
                 </div>
             </div>
         </div>
-
-
+        
         <script>
             // a basic queue data structure for maintaining songs
             class Queue {
