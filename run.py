@@ -98,7 +98,7 @@ def library():
     return render_template('library.html', data=data)
 
 # User's playlists page
-#@app.route('/playlists', defaults={'name': None}, methods=['GET', 'POST'])
+@app.route('/playlists', defaults={'name': None}, methods=['GET', 'POST'])
 @app.route('/playlists/<name>', methods=['GET', 'POST'])
 def playlists(name):
     if 'user_id' not in session:
@@ -106,13 +106,20 @@ def playlists(name):
         return redirect(url_for('login', error=error))
     data = {}
     if 'pname' in request.form:
+        pname = str(request.form["pname"])
+        pdesc = str(request.form["pdesc"])
         # sql query to create a playlist specific to a user with a pname, pdesc, and user_id
-        sql = ""
+        sql = "insert into playlist(user_id, name, description) values({user_id}, '{pname}', '{pdesc}')".format(user_id=session['user_id'], pname=pname, pdesc=pdesc)
         sql_execute(sql)
-    # sql query to return the requested playlist of a specific user
-    sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{name}' and s.song_id=ip.song_id".format(name=name)
-    songs = sql_query(sql)
-    data['songs'] = songs
+        # sql query to return the songs of the new playlist of a specific user (will be empty)
+        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{pname}' and s.song_id=ip.song_id".format(pname=pname)
+        songs = sql_query(sql)
+        data['songs'] = songs
+    else:
+        # sql query to return the songs of the requested playlist of a specific user
+        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{name}' and s.song_id=ip.song_id".format(name=name)
+        songs = sql_query(sql)
+        data['songs'] = songs
     # sql query to return all playlists a user has
     sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
