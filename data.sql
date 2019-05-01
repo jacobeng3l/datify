@@ -398,8 +398,8 @@ insert into in_library(user_id, song_id) values
 insert into in_library(user_id, song_id) values
   (4, 102);
     
-insert into playlist(playlist_id, name) values 
-  (2, 'Workout');
+insert into playlist(playlist_id, name, user_id) values 
+  (2, 'Workout', 2);
 
 insert into in_playlist(playlist_id, song_id, added_by) values
   (2, 9, 2);
@@ -408,17 +408,17 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 insert into in_playlist(playlist_id, song_id, added_by) values
   (2, 20, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (2, 55, 4);
+  (2, 55, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (2, 62, 4);
+  (2, 62, 2);
 
-insert into has_playlist(user_id, playlist_id) values 
-  (2, 2);
-insert into has_playlist(user_id, playlist_id) values 
-  (4, 2);
+--insert into has_playlist(user_id, playlist_id) values 
+--  (2, 2);
+--insert into has_playlist(user_id, playlist_id) values 
+--  (4, 2);
   
-insert into playlist(playlist_id, name) values 
-  (3, 'In My Feels');
+insert into playlist(playlist_id, name, user_id) values 
+  (3, 'In My Feels', 1);
   
 insert into in_playlist(playlist_id, song_id, added_by) values
   (3, 50, 1);
@@ -429,27 +429,57 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 insert into in_playlist(playlist_id, song_id, added_by) values
   (3, 63, 1);
   
-insert into has_playlist(user_id, playlist_id) values 
-  (1, 3);
+--insert into has_playlist(user_id, playlist_id) values 
+--  (1, 3);
   
-insert into playlist(playlist_id, name) values 
-  (4, 'Sleepy Time');
+insert into playlist(playlist_id, name, user_id) values 
+  (4, 'Sleepy Time', 1);
+  
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 74, 1);
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 8, 1);
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 85, 1);
+  
+insert into playlist(playlist_id, name, user_id) values 
+  (4, 'Sleepy Time', 2);
+  
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 74, 2);
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 8, 2);
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 85, 2);
+  
+insert into playlist(playlist_id, name, user_id) values 
+  (4, 'Sleepy Time', 3);
   
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 74, 3);
 insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 8, 3);
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 85, 3);
+  
+insert into playlist(playlist_id, name, user_id) values 
+  (4, 'Sleepy Time', 4);
+  
+insert into in_playlist(playlist_id, song_id, added_by) values
+  (4, 74, 4);
+insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 8, 4);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 85, 1);
+  (4, 85, 4);
   
-insert into has_playlist(user_id, playlist_id) values 
-  (1, 4);
-insert into has_playlist(user_id, playlist_id) values 
-  (2, 4);
-insert into has_playlist(user_id, playlist_id) values 
-  (3, 4);
-insert into has_playlist(user_id, playlist_id) values 
-  (4, 4);
+--insert into has_playlist(user_id, playlist_id) values 
+--  (1, 4);
+--insert into has_playlist(user_id, playlist_id) values 
+--  (2, 4);
+--insert into has_playlist(user_id, playlist_id) values 
+--  (3, 4);
+--insert into has_playlist(user_id, playlist_id) values 
+--  (4, 4);
   
 insert into is_friend(follower, following) values
   (2,1);
