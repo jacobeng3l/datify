@@ -56,12 +56,13 @@ delete from is_friend where following = 'FRIEND'
 
 #selecting the songs in a given playlist
 select s.name, s.explicit, s.duration, ar.name, al.name
-from song s, artist ar, album al, playlist p, in_playlist ip
+from song s, artist ar, album al, playlist p, in_playlist ip, user u
 where s.artist_id = ar.artist_id
   and s.album_id = al.album_id
   and p.playlist_id = ip.playlist_id
   and p.name = 'PLAYLIST'
   and s.song_id = ip.song_id
+  and u.user_id = 'USER'
 
 #select most recently played song
 select user_id, current_song_id, times
