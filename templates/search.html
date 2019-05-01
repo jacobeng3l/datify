@@ -187,10 +187,12 @@
             <a href="{{ url_for('playlists') }}">Playlists</a>
             <a href="{{ url_for('friends') }}">Friends</a>
             <div class="search-container">
+                <a class="active">
                 <form action="{{ url_for('search') }}" method="post">
                     <input type="text" placeholder="Search" name="search" value="{{ request.form.search }}">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
+                </a>
             </div>
         </div>
         {% if data['results']|length == 0 %}
@@ -244,7 +246,7 @@
                 </div>
             </div>
         </div>
-        
+
         <script>
             // a basic queue data structure for maintaining songs
             class Queue {
