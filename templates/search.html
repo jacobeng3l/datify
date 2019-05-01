@@ -295,9 +295,8 @@
                     }
                     // if it's not the same song that was playing, restart it
                     if (lastSongIndex !== currentSongIndex) {
-                        // both might work *testing*
-                        songs[currentSongIndex].currentTime = "0";
-                        //songs[currentSongIndex].load();
+                        //songs[currentSongIndex].currentTime = "0";
+                        songs[currentSongIndex].load();
                     }
                     var promise = songs[currentSongIndex].play();
                     if (promise !== undefined) {
