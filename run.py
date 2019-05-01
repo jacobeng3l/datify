@@ -12,6 +12,8 @@ app = Flask(__name__, static_url_path='/static')
 # Secret key for unique user sessions
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+session.clear()
+
 # Create a function for fetching data from the database.
 def sql_query(sql):
     db = mysql.connector.connect(**config['mysql.connector'])
@@ -76,6 +78,8 @@ def library():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    if "name" in request.form:
+        print(request.form["name"])
     if "played-song" in request.form:
         played_song_id = int(request.form['played-song'])
         sql = "update song set song.plays = song.plays + 1 where song.song_id={played_song_id}".format(played_song_id=played_song_id)
