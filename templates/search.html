@@ -194,7 +194,7 @@
             </div>
         </div>
         {% if data['results']|length == 0 %}
-        <h2 style="color: red; text-align: center; font-size: 50px">No search results.</h2>
+        <h2 style="text-align: center; font-size: 20px">No search results for "{{ data['query'] }}".</h2>
         {% else %}
         <table id="library">
             <tr>
