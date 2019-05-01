@@ -213,9 +213,9 @@
                         <audio id="audio" src="/static/{{ song[7] }}" type="audio/mpeg" ontimeupdate="updateBar(this)">
                             Your browser does not support the audio element.
                         </audio>
-                        <form action="{{ url_for('library') }}" method="post">
+                        
                         <button type="submit" onclick="togglePlayPause(this)" name="played-song" value="{{ song[0] }}" type="button" id="play" class='far fa-play-circle'></button>
-                        </form>
+                        
                     </td>
                     <td style="text-align: center">
                         <form action="{{ url_for('library') }}" method="post">
