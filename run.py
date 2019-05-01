@@ -62,6 +62,7 @@ def homepage():
     if 'user_id' not in session:
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
+    """
     if request.method == 'POST':
         if "library" in request.form:
             return redirect(url_for('library'))
@@ -69,6 +70,7 @@ def homepage():
             return redirect(url_for('playlists'))
         if "friends" in request.form:
             return redirect(url_for('friends'))
+    """
     return render_template('homepage.html')
 
 # Song library page
@@ -79,6 +81,7 @@ def library():
         return redirect(url_for('login', error=error))
     data = {}
     if "items" in request.form:
+        print(request.form["items"].split(','))
         for song_id in request.form["items"].split(','):
             print(song_id)
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
@@ -92,20 +95,31 @@ def library():
     sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, in_library, user, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and user.user_id={user_id} and user.user_id=in_library.user_id and in_library.song_id = song.song_id order by song.name".format(user_id=session['user_id'])
     songs = sql_query(sql)
     data['songs'] = songs
+    # sql query to return all playlists a user has
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, has_playlist hp where hp.user_id={user_id} and hp.playlist_id=p.playlist_id".format(user_id=session['user_id'])
+    playlists = sql_query(sql)
+    data['playlists'] = playlists
     return render_template('library.html', data=data)
 
 # User's playlists page
-@app.route('/playlists', methods=['GET', 'POST'])
-def playlists():
+@app.route('/playlists/<name>', methods=['GET', 'POST'])
+def playlists(name):
     if 'user_id' not in session:
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
-    # sql query to return playlists of a specific user
-    ## wrong current sql query ##
-    sql = "select song_id, explicit, song.name, song.album_id, album.name, plays, duration, file_loc from song, album where song.album_id = album.album_id order by song.name"
+    if 'pname' in request.form:
+        # sql query to create a playlist specific to a user with a pname, pdesc, and user_id
+        sql = ""
+        sql_execute(sql)
+    # sql query to return the requested playlist of a specific user
+    sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{name}' and s.song_id=ip.song_id".format(name=name)
     songs = sql_query(sql)
     data['songs'] = songs
+    # sql query to return all playlists a user has
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, has_playlist hp where hp.user_id={user_id} and hp.playlist_id=p.playlist_id".format(user_id=session['user_id'])
+    playlists = sql_query(sql)
+    data['playlists'] = playlists
     return render_template('playlists.html', data=data)
 
 # Friends page
@@ -120,6 +134,10 @@ def friends():
     sql = "select u.name, u.email from user u, is_friend f where f.follower={user_id}".format(user_id=session['user_id'])
     friends = sql_query(sql)
     data['friends'] = friends
+    # sql query to return all playlists a user has
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, has_playlist hp where hp.user_id={user_id} and hp.playlist_id=p.playlist_id".format(user_id=session['user_id'])
+    playlists = sql_query(sql)
+    data['playlists'] = playlists
     return render_template('friends.html', data=data)
 
 # Search page
@@ -146,6 +164,10 @@ def search():
     sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and song.name like '%{query}%' order by song.name".format(query=clean_query)
     results = sql_query(sql)
     data['results'] = results
+    # sql query to return all playlists a user has
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, has_playlist hp where hp.user_id={user_id} and hp.playlist_id=p.playlist_id".format(user_id=session['user_id'])
+    playlists = sql_query(sql)
+    data['playlists'] = playlists
     return render_template('search.html', data=data)
 
 def string_cleaner(phrase):
