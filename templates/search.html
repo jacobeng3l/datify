@@ -192,7 +192,7 @@
             </div>
         </div>
 
-        <form action="." method="post">
+        <form action="{{ url_for('search') }}" method="post">
             {% if data['results']|length == 0 %}
             <p style="color: red">No search results!</p>
             {% else %}
@@ -217,7 +217,7 @@
                         <button onclick="togglePlayPause(this)" type="button" id="play" class='far fa-play-circle'></button>
                     </td>
                     <td style="text-align: center">
-                        <button id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
+                        <button id="saved" name="add-song" value="{{ song[0] }}" class='fas fa-plus' onclick="toggleSave(this)"></button>
                     </td>
                     <td>{{ song[2] }}</td> <!-- song -->
                     <td>{{ song[1] }}</td> <!-- explicit -->
@@ -345,6 +345,18 @@
                 ret += "" + mins + ":" + (secs < 10 ? "0" : "");
                 ret += "" + secs;
                 return ret;
+            }
+
+            function toggleSave(button) {
+                if (button.className == 'fas fa-plus') {
+                    button.className = 'fas fa-check';
+                    button.setAttribute("name", "delete-song");
+                }
+                else {
+                    button.className = 'fas fa-plus';
+                    button.setAttribute("name", "add-song");
+                }
+
             }
         </script>
 	</body>
