@@ -79,9 +79,8 @@ def library():
     print(request.form)
     if "items" in request.form:
         print(request.form["items"])
-        print(request.form["items"][0])
-        print(request.form["items"][0].split(','))
-        for song_id in request.form["items"][0].split(','):
+        print(request.form["items"].split(','))
+        for song_id in request.form["items"].split(','):
             print(song_id)
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
@@ -133,9 +132,8 @@ def search():
     data = {}
     if "items" in request.form:
         print(request.form["items"])
-        print(request.form["items"][0])
-        print(request.form["items"][0].split(','))
-        for song_id in request.form["items"][0].split(','):
+        print(request.form["items"].split(','))
+        for song_id in request.form["items"].split(','):
             print(song_id)
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
