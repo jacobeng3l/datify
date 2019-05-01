@@ -77,8 +77,8 @@ def library():
         return redirect(url_for('login', error=error))
     data = {}
     print(request.form)
-    if "name" in request.form:
-        print(request.form["name"])
+    if "items" in request.form:
+        print(request.form["items"])
     if "played-song" in request.form:
         played_song_id = int(request.form['played-song'])
         sql = "update song set song.plays = song.plays + 1 where song.song_id={played_song_id}".format(played_song_id=played_song_id)
