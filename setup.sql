@@ -1,13 +1,17 @@
---
--- Example setup file for a web database project.
---
+-- 
+-- Configutation for schema for Datify Database
+-- very sparse data added
 
+-- THIS IS CONFIGURATION FOR CREATING DATABASE
 -- create database and user, grant privileges to user
 -- create database datify;
 -- create user 'mysql_username' identified by 'mysql_password';
 -- grant all on datify.* to 'mysql_username';
 -- flush privileges;
+-- use team_8
 
+
+-- Currently uncommented code uses already made database team_8 provided on server 
 -- select the database and create tables
 
 use team_8;
