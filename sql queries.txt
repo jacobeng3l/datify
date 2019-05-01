@@ -29,6 +29,14 @@ Select s.song_id, s.name, s.plays, s.explicit, s.file_loc, s.album_id, s.duratio
 From song s, artist a
 where a.name like '%SEARCH%' ^ a.artist_id = s.artist_id
 
+#insert into playlist
+insert into in_playlist (playlist_id, song_id, added_by)
+values ('PLAYLIST','SONG','USER')
+
+#insert into library
+insert into in_library (user_id, song_id)
+values ('USER','SONG')
+
 
 
 
