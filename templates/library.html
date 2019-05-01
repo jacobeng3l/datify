@@ -214,12 +214,12 @@
                             Your browser does not support the audio element.
                         </audio>
                         <form action="{{ url_for('library') }}" method="post">
-                        <button onclick="togglePlayPause(this)" name="played-song" value="{{ song[0] }}" type="button" id="play" class='far fa-play-circle'></button>
+                        <button type="submit" onclick="togglePlayPause(this)" name="played-song" value="{{ song[0] }}" type="button" id="play" class='far fa-play-circle'></button>
                         </form>
                     </td>
                     <td style="text-align: center">
                         <form action="{{ url_for('library') }}" method="post">
-                        <button id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
+                        <button type="submit" id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
                         </form>
                     </td>
                     <td>{{ song[2] }}</td> <!-- song -->
