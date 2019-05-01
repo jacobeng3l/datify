@@ -1,3 +1,5 @@
+Very general outline of what you need to run this server
+
 sudo apt-get install mysql-server
 
 mkdir datify
