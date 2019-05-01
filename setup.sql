@@ -125,8 +125,8 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
 insert into user(user_id, email, name, password) values 
     (1, 'abc1@case.edu', 'Alex', 'password');
 
-insert into playlist(playlist_id, name) values 
-    (1, 'Hype Music');
+insert into playlist(playlist_id, name, user_id) values 
+    (1, 'Hype Music', 1);
     
 insert into in_library(user_id, song_id) values
     (1, 2);
@@ -138,5 +138,5 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 insert into in_playlist(playlist_id, song_id, added_by) values
     (1, 4, 1);
 
-insert into has_playlist(user_id, playlist_id) values 
-    (1, 1);
+-- insert into has_playlist(user_id, playlist_id) values 
+--     (1, 1);
