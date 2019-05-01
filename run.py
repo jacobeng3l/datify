@@ -77,10 +77,7 @@ def library():
         return redirect(url_for('login', error=error))
     data = {}
     if "items" in request.form:
-        print(request.form)
-        print(request.form["items"].split(','))
         for song_id in request.form["items"].split(','):
-            print(song_id)
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
     if "delete-song" in request.form:
@@ -154,7 +151,6 @@ def search():
     data = {}
     if "items" in request.form:
         for song_id in request.form["items"].split(','):
-            print(song_id)
             sql = "update song set song.plays=song.plays+1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
     if "add-song" in request.form:
