@@ -76,6 +76,7 @@ def library():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    print(request.form)
     if "name" in request.form:
         print(request.form["name"])
     if "played-song" in request.form:
