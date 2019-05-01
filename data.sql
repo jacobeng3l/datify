@@ -1,5 +1,7 @@
 -- Initial Data Input 
 -- insert data into database
+
+-- create initial albums
 insert into album(album_id, name) values
 	(1, 'The Click');
 insert into album(album_id, name) values
@@ -7,13 +9,15 @@ insert into album(album_id, name) values
 insert into album(album_id, name) values
 	(3, '?');
 
+-- create inital artists
 insert into artist(artist_id, name) values
 	(1, 'XXXTentacion');
 insert into artist(artist_id, name) values
 	(2, 'George Washington');
 insert into artist(artist_id, name) values
         (3, 'AJR');
-    
+
+-- create initial songs
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values 
     (1, 'Sober Up', 218, 4, '/home', 1, 3);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values 
@@ -23,12 +27,15 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values 
     (4, 'SAD!', 167, 4, '/home', 3, 1);
 
+-- create initial user
 insert into user(user_id, email, name, password) values 
     (1, 'abc1@case.edu', 'Alex', 'password');
 
+-- creates an initial playlist
 insert into playlist(playlist_id, name, user_id) values 
     (1, 'Hype Music', 1);
-    
+
+-- puts some of the initial songs in user 1's library
 insert into in_library(user_id, song_id) values
     (1, 2);
 insert into in_library(user_id, song_id) values
@@ -36,6 +43,7 @@ insert into in_library(user_id, song_id) values
 insert into in_library(user_id, song_id) values
     (1, 4);
 
+-- puts 2 of the initial songs into the initial playlist
 insert into in_playlist(playlist_id, song_id, added_by) values
     (1, 2, 1);
 insert into in_playlist(playlist_id, song_id, added_by) values
@@ -46,6 +54,7 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 
 -- Round 2 Data Input 
 
+-- creates more users
 insert into user(user_id, email, name, password) values 
   (2, 'abc2@case.edu', 'Jacob', '2');
 insert into user(user_id, email, name, password) values 
@@ -53,12 +62,15 @@ insert into user(user_id, email, name, password) values
 insert into user(user_id, email, name, password) values 
   (4, 'abc4@case.edu', 'Jordan', '4');
 
+-- creates another artist
 insert into artist(artist_id, name) values
   (4, 'Kanye West');
   
+-- creates another album
 insert into album(album_id, name) values
   (4, 'Yeezus');
-  
+
+-- creates songs from that album
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (5, 'On Sight', 157, 1, '/home', 4, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
@@ -79,10 +91,13 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
   (13, 'Send It Up', 157, 9, '/home', 4, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (14, 'Bound 2', 210, 10, '/home', 4, 4);
-  
+
+
+-- creates a new album
 insert into album(album_id, name) values
   (5, 'My Beautiful Dark Twisted Fantasy');
   
+-- creates songs from that new album
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (15, 'Dark Fantasy', 157, 1, '/home', 5, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
@@ -112,9 +127,11 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (28, 'See Me Now', 246, 14, '/home', 5, 4);
 
+-- creates a new album
 insert into album(album_id, name) values
   (6, 'ye');
-  
+
+-- creates songs from that new album
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (29, 'I Thought About Killing You', 648, 1, '/home', 6, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
@@ -129,13 +146,16 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
   (34, 'Ghost Town', 250, 6, '/home', 6, 4);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (35, 'Violent Crimes', 216, 7, '/home', 6, 4);
-  
+
+-- creates a new artist
 insert into artist(artist_id, name) values
   (5, 'Imagine Dragons');
-  
+
+-- creates a new album for that new artist
 insert into album(album_id, name) values
   (7, 'Night Visions');
-  
+
+-- creates songs from that new album
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (36, 'Tiptoe', 216, 2, '/home', 7, 5);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
@@ -170,10 +190,12 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
   (51, 'America', 216, 17, '/home', 7, 5);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (52, 'Selene', 216, 18, '/home', 7, 5);
-  
+
+-- creates a new album
 insert into album(album_id, name) values
   (8, 'Smoke and Mirrors');
-  
+
+-- creates songs from that new album
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (53, 'Shots', 274, 1, '/home', 8, 5);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
@@ -216,10 +238,12 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
   (72, 'Monster', 274, 20, '/home', 8, 5);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (73, 'Who We Are', 274, 21, '/home', 8, 5);
-  
+
+-- creates a new album
 insert into album(album_id, name) values
   (9, 'Evolve');
   
+-- creates songs from that new album
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (74, 'I Don\'t Know Why', 253, 1, '/home', 9, 5);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
@@ -242,13 +266,16 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
   (83, 'Start Over', 253, 10, '/home', 9, 5);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (84, 'Dancing in the Dark', 253, 11, '/home', 9, 5);
-  
+
+-- creates a new artist
 insert into artist(artist_id, name) values
   (6, 'The Weeknd');
-  
+
+-- creates an album for that new artist
 insert into album(album_id, name) values
   (10, 'Starboy');
   
+-- creates songs from that new album
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (85, 'Starboy', 312, 1, '/home', 10, 6);
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
@@ -286,6 +313,7 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
 insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) values
   (102, 'I Feel It Coming', 312, 1, '/home', 10, 6);
 
+-- put songs into user 1's library
 insert into in_library(user_id, song_id) values
   (1, 6);
 insert into in_library(user_id, song_id) values
@@ -319,6 +347,7 @@ insert into in_library(user_id, song_id) values
 insert into in_library(user_id, song_id) values
   (1, 85);
     
+-- put songs into user 2's library
 insert into in_library(user_id, song_id) values
   (2, 8);
 insert into in_library(user_id, song_id) values
@@ -375,7 +404,8 @@ insert into in_library(user_id, song_id) values
   (2, 94);
 insert into in_library(user_id, song_id) values
   (2, 100);
-    
+
+-- put songs into user 3's library
 insert into in_library(user_id, song_id) values
   (3, 8);
 insert into in_library(user_id, song_id) values
@@ -402,7 +432,8 @@ insert into in_library(user_id, song_id) values
   (3, 84);
 insert into in_library(user_id, song_id) values
   (3, 85);
-    
+
+-- put songs into user 4's library
 insert into in_library(user_id, song_id) values
   (4, 8);
 insert into in_library(user_id, song_id) values
@@ -445,10 +476,12 @@ insert into in_library(user_id, song_id) values
   (4, 98);
 insert into in_library(user_id, song_id) values
   (4, 102);
-    
+
+-- create another playlist for user 2
 insert into playlist(playlist_id, name, user_id) values 
   (2, 'Workout', 2);
 
+-- put songs into that new playlist
 insert into in_playlist(playlist_id, song_id, added_by) values
   (2, 9, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values
@@ -464,10 +497,12 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 --  (2, 2);
 -- insert into has_playlist(user_id, playlist_id) values 
 --  (4, 2);
-  
+
+-- create another playlist for user 1
 insert into playlist(playlist_id, name, user_id) values 
   (3, 'In My Feels', 1);
-  
+
+-- put songs into that new playlist
 insert into in_playlist(playlist_id, song_id, added_by) values
   (3, 50, 1);
 insert into in_playlist(playlist_id, song_id, added_by) values
@@ -479,40 +514,48 @@ insert into in_playlist(playlist_id, song_id, added_by) values
   
 -- insert into has_playlist(user_id, playlist_id) values 
 --  (1, 3);
-  
+
+-- create a new playlist for user 1
 insert into playlist(playlist_id, name, user_id) values 
   (4, 'Sleepy Time', 1);
-  
+
+-- put songs into that new playlist
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 74, 1);
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 8, 1);
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 85, 1);
-  
+
+-- create a new playlist for user 2
 insert into playlist(playlist_id, name, user_id) values 
   (4, 'Sleepy Time', 2);
-  
+
+-- put songs into that new playlist for user 2
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 74, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 8, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 85, 2);
-  
+
+-- create a new playlist for user 3
 insert into playlist(playlist_id, name, user_id) values 
   (4, 'Sleepy Time', 3);
-  
+
+-- put songs into that new playlist for user 3
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 74, 3);
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 8, 3);
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 85, 3);
-  
+
+-- create a new playlist for user 4
 insert into playlist(playlist_id, name, user_id) values 
   (4, 'Sleepy Time', 4);
-  
+
+-- put songs into that new playlist for user 4
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 74, 4);
 insert into in_playlist(playlist_id, song_id, added_by) values
@@ -528,7 +571,8 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 --  (3, 4);
 -- insert into has_playlist(user_id, playlist_id) values 
 --  (4, 4);
-  
+
+-- create friendships between some existing users
 insert into is_friend(follower, following) values
   (2,1);
 insert into is_friend(follower, following) values
