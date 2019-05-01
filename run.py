@@ -77,6 +77,7 @@ def library():
         return redirect(url_for('login', error=error))
     data = {}
     if "items" in request.form:
+        print(request.form)
         print(request.form["items"].split(','))
         for song_id in request.form["items"].split(','):
             print(song_id)
