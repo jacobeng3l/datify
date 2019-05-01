@@ -87,7 +87,7 @@ insert into in_library(user_id, song_id) values (5, 1);
 insert into in_library(user_id, song_id) values (5, 3);
 
 insert into playlist(playlist_id, name, description) values (100, 'Happy', 'For when you\'re in a good mood');
-insert into playlist(playlist_id, name, description) values (100, 'Sad', 'For when you\'re in a bad mood');
+insert into playlist(playlist_id, name, description) values (101, 'Sad', 'For when you\'re in a bad mood');
 
 insert into in_playlist(playlist_id, song_id, added_by) values (100, 1, 5);
 insert into in_playlist(playlist_id, song_id, added_by) values (100, 3, 5);
