@@ -77,7 +77,11 @@ where user_id = 'USER'
   and current_song_id = 'CURRENT_SONG'
   and times = 'TIMES'
 
-
+Select s.song_id, s.name
+from song s, in_library il, user u
+where u.user_id = 'USER' and il.user_id = u.user_id and s.song_id = il.song_id and s.name not in (
+select s2.name from user u2, song s2, in_playlist ip2, playlist p 
+where ip2.playlist_id = p.playlist_id and s2.song_id = ip2.song_id and p.name = 'PLAYLIST' and u2.user_id = 'USER' )
 
 
 
