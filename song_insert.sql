@@ -66,7 +66,7 @@ insert into song(song_id, name, duration, num, file_loc, album_id, artist_id) va
     (214, 'You\'re Not Wrong', 99, 1, 'You_re_Not_Wrong.mp3', 204, 214);
 
 insert into user(user_id, email, name, password) values 
-	(5, 'abc5@case.edu', 'EECS 341', 'test');
+    (5, 'abc5@case.edu', 'EECS 341', 'test');
 	
 insert into in_library(user_id, song_id) values (5, 200);
 insert into in_library(user_id, song_id) values (5, 201);
@@ -86,8 +86,8 @@ insert into in_library(user_id, song_id) values (5, 214);
 insert into in_library(user_id, song_id) values (5, 1);
 insert into in_library(user_id, song_id) values (5, 3);
 
-insert into playlist(playlist_id, name, description) values (100, 'Happy', 'For when you\'re in a good mood');
-insert into playlist(playlist_id, name, description) values (101, 'Sad', 'For when you\'re in a bad mood');
+insert into playlist(playlist_id, name, description, user_id) values (100, 'Happy', 'For when you\'re in a good mood', 5);
+insert into playlist(playlist_id, name, description, user_id) values (101, 'Sad', 'For when you\'re in a bad mood', 5);
 
 insert into in_playlist(playlist_id, song_id, added_by) values (100, 1, 5);
 insert into in_playlist(playlist_id, song_id, added_by) values (100, 3, 5);
