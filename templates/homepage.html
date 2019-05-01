@@ -9,51 +9,6 @@
 		<style>
 			body {font-family: Arial, Helvetica, sans-serif;}
 
-			/* Set a style for all buttons */
-			#listbtn button {
-				background-color: #0B304D;
-				color: white;
-				padding: 14px 20px;
-				margin: 8px 0;
-				border: none;
-				cursor: pointer;
-				width: 100%;
-				border-radius: 4px;
-				transition: all 0.5s;
-				display: inline-block;
-				font-size: 14px
-			}
-
-			#listbtn button span {
-				cursor: pointer;
-				display: inline-block;
-				position: relative;
-				transition: 0.5s;
-			}
-
-			#listbtn button span:after {
-				content: '\279c';
-				font-size: 20px;
-				position: absolute;
-				opacity: 0;
-				top: -6px;
-				right: -50px;
-				transition: 0.5s;
-			}
-
-			#listbtn button:hover span {
-				padding-right: 32px;
-			}
-
-			#listbtn button:hover span:after {
-				opacity: 1;
-				right: 0;
-			}
-
-			#listbtn button:hover {
-				opacity: 0.8;
-			}
-
 			.topnav {
                 overflow: hidden;
                 background-color: #e9e9e9;
@@ -66,13 +21,54 @@
                 text-align: center;
                 padding: 14px 16px;
                 text-decoration: none;
+                font-size: 16px;
+			}
+			
+			.dropdown {
+				float: left;
+				overflow: hidden;
+			}
+
+			.dropdown .dropbtn {
+				float: left;
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
                 font-size: 17px;
-            }
+			}
               
-            .topnav a:hover {
+            .topnav a:hover, .dropdown:hover .dropbtn {
                 background-color: #ddd;
                 color: black;
-            }
+			}
+			
+			.dropdown-content {
+				display: none;
+				position: absolute;
+				background-color: #f9f9f9;
+				min-width: 160px;
+				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				z-index: 1;
+			}
+			  
+			.dropdown-content a {
+				float: none;
+				color: black;
+				padding: 12px 16px;
+				text-decoration: none;
+				display: block;
+				text-align: left;
+			}
+			  
+			.dropdown-content a:hover {
+				background-color: #ddd;
+			}
+			  
+			.dropdown:hover .dropdown-content {
+				display: block;
+			}
               
             .topnav a.active {
                 background-color: #0b304d;
@@ -104,7 +100,8 @@
             .topnav .search-container button:hover {
                 background: #ccc;
             }
-              
+			  
+			/* Might be able to remove this compatability for smaller screens */
             @media screen and (max-width: 600px) {
                 .topnav .search-container {
                   float: none;
@@ -121,48 +118,8 @@
                   border: 1px solid #ccc;  
                 }
 			}
-
-			.dropdown {
-				float: left;
-				overflow: hidden;
-			}
-			  
-			.dropdown .dropbtn {
-				float: left;
-                display: block;
-                color: black;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                font-size: 17px;
-			}
 			
-			.dropdown-content {
-				display: none;
-				position: absolute;
-				background-color: #f9f9f9;
-				min-width: 160px;
-				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-				z-index: 1;
-			}
-			  
-			.dropdown-content a {
-				float: none;
-				color: black;
-				padding: 12px 16px;
-				text-decoration: none;
-				display: block;
-				text-align: left;
-			}
-			  
-			.dropdown-content a:hover {
-				background-color: #ddd;
-			}
-			  
-			.dropdown:hover .dropdown-content {
-				display: block;
-			}
-			
+			/** Modal for create playlist **/
 			/* Full-width input fields */
 			#id01 input[type=text], #id01 input[type=password] {
 				width: 100%;
