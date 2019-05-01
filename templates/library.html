@@ -201,7 +201,7 @@
                     <th></th>
                     <th></th>
                     <th>Title</th>
-                    <th>Explicit?</th>
+                    <th></th>
                     <th>Artist</th>
                     <th>Album</th>
                     <th>Plays</th>
@@ -219,7 +219,10 @@
                         <button id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
                     </td>
                     <td>{{ song[2] }}</td> <!-- song -->
-                    <td>{{ song[1] }}</td> <!-- explicit -->
+                    {% if song[1] == 'Yes' %}
+                    <td><img src="https://i.stack.imgur.com/tkB9m.png"></td> <!-- explicit -->
+                    {% else %}
+                    <td></td> <!-- not explicit -->
                     <td>{{ song[8] }}</td> <!-- artist -->
                     <td>{{ song[4] }}</td> <!-- album -->
                     <td>{{ song[5] }}</td> <!-- plays -->
