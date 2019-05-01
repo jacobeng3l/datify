@@ -100,7 +100,7 @@ create table in_playlist(
 insert into album(album_id, name) values
 	(1, 'The Click');
 insert into album(album_id, name) values
-	(2, 'Youtube');
+	(2, 'YouTube');
 insert into album(album_id, name) values
 	(3, '?');
 
