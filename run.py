@@ -137,12 +137,22 @@ def search():
         # sql query for adding a song to a user's library
         sql = "insert into in_library(user_id, song_id) values({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
         sql_execute(sql)
-    data['query'] = str(request.form['search'])
+    data['query'] = string_cleaner(str(request.form['search']))
+    print(data['query'])
     # sql query to return search results
     sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and song.name like '%{query}%' order by song.name".format(query=request.form['search'])
     results = sql_query(sql)
     data['results'] = results
     return render_template('search.html', data=data)
+
+def string_cleaner(phrase):
+    new = ""
+    for i in phrase:
+        if i == '\'':
+            new = new + "\\\'"
+        else:
+            new = new + i
+    return new
 
 if __name__ == '__main__':
     app.run(**config['app'])
