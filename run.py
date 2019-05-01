@@ -98,6 +98,7 @@ def library():
     return render_template('library.html', data=data)
 
 # User's playlists page
+#@app.route('/playlists', defaults={'name': None}, methods=['GET', 'POST'])
 @app.route('/playlists/<name>', methods=['GET', 'POST'])
 def playlists(name):
     if 'user_id' not in session:
