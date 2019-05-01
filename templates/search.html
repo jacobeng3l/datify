@@ -271,9 +271,9 @@
 
             var songQueue = new Queue();
             var buttonQueue = new Queue();
+            var totalQueue = new Queue();
             var songs = document.querySelectorAll('#audio');
             var buttons = document.querySelectorAll('#play');
-            var a = document.getElementById("play");
             var lastSongIndex = -1;
             
             function togglePlayPause(button) {
@@ -306,7 +306,7 @@
                             // Autoplay was prevented.
                         });
                     }
-
+                    totalQueue.enqueue(songs[currentSongIndex]);
                     lastSongIndex = currentSongIndex;
                     songQueue.enqueue(songs[currentSongIndex]);
                     buttonQueue.enqueue(button);
@@ -364,6 +364,13 @@
                 }
 
             }
+
+            window.onbeforeunload = function(event) {
+                var request = new XMLHttpRequest();
+                request.open("POST", "/library", true);
+                request.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+                request.send("items="+totalQueue.items);
+            };
         </script>
 	</body>
 </html>
