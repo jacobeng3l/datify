@@ -76,10 +76,7 @@ def library():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
-    print(request.form)
     if "items" in request.form:
-        print(request.form["items"])
-        print(request.form["items"].split(','))
         for song_id in request.form["items"].split(','):
             print(song_id)
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
@@ -131,8 +128,6 @@ def search():
         return redirect(url_for('login', error=error))
     data = {}
     if "items" in request.form:
-        print(request.form["items"])
-        print(request.form["items"].split(','))
         for song_id in request.form["items"].split(','):
             print(song_id)
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
