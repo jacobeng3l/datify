@@ -124,7 +124,8 @@
 		</style>
 	</head>
 	<body>
-		<div class="topnav">
+		<!-- Navigation bar locked to the top of the screen -->
+        <div class="topnav">
             <a class="active" href="{{ url_for('homepage') }}">Home</a>
             <a href="{{ url_for('library') }}">Library</a>
             <a href="{{ url_for('playlists') }}">Playlists</a>
@@ -137,7 +138,7 @@
             </div>
         </div>
 		<h1 style="text-align:center; font-size:100px;">Datify</h1>
-		<div align="center">
+		<div style="text-align: center">
 			<form action="{{ url_for('library') }}" method="post">
 				<button type="submit" style="width:auto" name="library"><span>Library</span></button>
 			</form>
