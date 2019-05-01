@@ -98,6 +98,19 @@ create table in_playlist(
     FOREIGN KEY (added_by) REFERENCES user(user_id)
 );
 
+create table plays(
+  user_id int not null,
+  current_song_id int not null,
+  previous_song_id int, 
+  next_song_id int, 
+  times datetime not null, 
+  PRIMARY KEY (user_id, current_song_id, times), 
+  FOREIGN KEY (user_id) REFERENCES user(user_id), 
+  FOREIGN KEY (current_song_id) REFERENCES song(song_id), 
+  FOREIGN KEY (previous_song_id) REFERENCES song(song_id), 
+  FOREIGN KEY (next_song_id) REFERENCES song(song_id)
+);
+
 -- insert data into database
 insert into album(album_id, name) values
 	(1, 'The Click');
