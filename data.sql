@@ -32,6 +32,8 @@ insert into playlist(playlist_id, name, user_id) values
 insert into in_library(user_id, song_id) values
     (1, 2);
 insert into in_library(user_id, song_id) values
+    (1, 3);
+insert into in_library(user_id, song_id) values
     (1, 4);
 
 insert into in_playlist(playlist_id, song_id, added_by) values
