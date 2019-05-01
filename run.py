@@ -12,8 +12,6 @@ app = Flask(__name__, static_url_path='/static')
 # Secret key for unique user sessions
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-session.clear()
-
 # Create a function for fetching data from the database.
 def sql_query(sql):
     db = mysql.connector.connect(**config['mysql.connector'])
