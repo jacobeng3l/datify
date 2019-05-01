@@ -367,12 +367,14 @@
 
             // Sends a POST request containing the IDs of the songs played to update
             // the number of plays for each song when a user goes to leave the page
-            window.onbeforeunload = function(event) {
-                var request = new XMLHttpRequest();
-                request.open("POST", "/library", true);
-                request.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-                request.send("items="+totalQueue.items);
-            };
+            window.addEventListener("beforeunload", function(event) {
+                if (!totalQueue.isEmpty()) {
+                    var request = new XMLHttpRequest();
+                    request.open("POST", "/library", true);
+                    request.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+                    request.send("items="+totalQueue.items); 
+                }
+            });
         </script>
 	</body>
 </html>
