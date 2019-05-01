@@ -63,7 +63,18 @@ where s.artist_id = ar.artist_id
   and p.name = 'PLAYLIST'
   and s.song_id = ip.song_id
 
+#select most recently played song
+select user_id, current_song_id, times
+from plays
+order by times desc
+limit 1
 
+#update the currnent_song_id to the previous_song_id
+update plays
+set next_song_id = 'NEXT_SONG'
+where user_id = 'USER'
+  and current_song_id = 'CURRENT_SONG'
+  and times = 'TIMES'
 
 
 
