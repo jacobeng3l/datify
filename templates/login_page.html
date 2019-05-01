@@ -163,7 +163,7 @@
       <form action="{{ url_for('login') }}" class="modal-content animate" method="post">
         <div class="imgcontainer">
           {% if error %}
-          <p onload="displayModal()" class="error" style="color: red"><strong>Error:</strong> {{ error }}</p>
+          <p id="error" class="error" style="color: red"><strong>Error:</strong> {{ error }}</p>
           {% endif %}
           <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
         </div>
@@ -188,18 +188,22 @@
     </div>
 
     <script>
-      // Get the login modal
+      // get the login modal
       var modal = document.getElementById('id01');
+      
+      // get the error message (if there is one)
+      var errorMsg = document.getElementById('error');
 
-      // When the user clicks anywhere outside of the modal, close it
+      // when the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
           if (event.target == modal) {
               modal.style.display = "none";
           }
       }
 
-      function displayModal() {
-        document.getElementById('id01').style.display='block';
+      // if the page loads with an error, show the login modal with the error message
+      errorMsg.onload = function displayModal() {
+        modal.style.display="block";
       }
     </script>
   </body>
