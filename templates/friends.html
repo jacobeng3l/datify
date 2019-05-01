@@ -6,6 +6,17 @@
 		<title>Friends</title> 
 	</head>
 	<body>
-		<h1>Friends - Not implemented</h1>
+		<div class="topnav">
+            <a href="{{ url_for('homepage') }}">Home</a>
+            <a href="{{ url_for('library') }}">Library</a>
+            <a href="{{ url_for('playlists') }}">Playlists</a>
+            <a class="active" href="{{ url_for('friends') }}">Friends</a>
+            <div class="search-container">
+                <form action="{{ url_for('search') }}" method="post">
+                    <input type="text" placeholder="Search" name="search" value="{{ request.form.search }}">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
 	</body>
 </html>

@@ -33,6 +33,7 @@
                 color: white;
             }
 
+            /* Table column width specifications */
             #library th:nth-child(1) {width: 5%;}
             #library th:nth-child(2) {width: 5%;}
             #library th:nth-child(3) {width: 25%;}
@@ -96,6 +97,7 @@
                 display: none;
             }
 
+            /* Bottom locked bar for the song progress bar */
             .navbar {
                 background-color: #0b304d;
                 overflow: hidden;
@@ -108,6 +110,7 @@
                 padding: 15px 15px 15px 15px;
             }
 
+            /****** All below CSS involves the top navigation bar ******/
             .topnav {
                 overflow: hidden;
                 background-color: #e9e9e9;
@@ -179,6 +182,7 @@
         </style>
 	</head>
 	<body>
+        <!-- Navigation bar locked to the top of the screen -->
         <div class="topnav">
             <a href="{{ url_for('homepage') }}">Home</a>
             <a class="active" href="{{ url_for('library') }}">Library</a>
@@ -191,51 +195,48 @@
                 </form>
             </div>
         </div>
-
         
-            {% if data['songs']|length == 0 %}
-            <p style="color: red">No songs saved!</p>
-            {% else %}
-            <table id="library">
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Title</th>
-                    <th></th>
-                    <th>Artist</th>
-                    <th>Album</th>
-                    <th>Plays</th>
-                    <th>Duration</th>
-                </tr>
-                {% for song in data['songs'] %}
-                <tr>
-                    <td style="text-align: center">
-                        <audio id="audio" src="/static/{{ song[7] }}" type="audio/mpeg" ontimeupdate="updateBar(this)">
-                            Your browser does not support the audio element.
-                        </audio>
-                        
-                        <button type="submit" onclick="togglePlayPause(this)" name="played-song" value="{{ song[0] }}" type="button" id="play" class='far fa-play-circle'></button>
-                        
-                    </td>
-                    <td style="text-align: center">
-                        <form action="{{ url_for('library') }}" method="post">
+        {% if data['songs']|length == 0 %}
+        <p style="color: red">No songs saved!</p>
+        {% else %}
+        <table id="library">
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Title</th>
+                <th></th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Plays</th>
+                <th>Duration</th>
+            </tr>
+            {% for song in data['songs'] %}
+            <tr>
+                <td style="text-align: center">
+                    <audio id="audio" src="/static/{{ song[7] }}" type="audio/mpeg" ontimeupdate="updateBar(this)">
+                        Your browser does not support the audio element.
+                    </audio> 
+                    <button onclick="togglePlayPause(this)" type="button" id="play" class='far fa-play-circle'></button> 
+                </td>
+                <td style="text-align: center">
+                    <form action="{{ url_for('library') }}" method="post">
                         <button type="submit" id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
-                        </form>
-                    </td>
-                    <td>{{ song[2] }}</td> <!-- song -->
-                    {% if song[1] == 'Yes' %}
-                    <td><img src="https://i.stack.imgur.com/tkB9m.png"></td> <!-- explicit -->
-                    {% else %}
-                    <td></td> <!-- not explicit -->
-                    {% endif %}
-                    <td>{{ song[8] }}</td> <!-- artist -->
-                    <td>{{ song[4] }}</td> <!-- album -->
-                    <td>{{ song[5] }}</td> <!-- plays -->
-                    <td id="duration">{{ song[6] }}</td> <!-- duration -->
-                </tr>
-                {% endfor %}
-            </table>
-            {% endif %}
+                    </form>
+                </td>
+                <td>{{ song[2] }}</td> <!-- song -->
+                {% if song[1] == 'Yes' %}
+                <td><img src="https://i.stack.imgur.com/tkB9m.png"></td> <!-- explicit (display logo) -->
+                {% else %}
+                <td></td> <!-- not explicit -->
+                {% endif %}
+                <td>{{ song[8] }}</td> <!-- artist -->
+                <td>{{ song[4] }}</td> <!-- album -->
+                <td>{{ song[5] }}</td> <!-- plays -->
+                <td id="duration">{{ song[6] }}</td> <!-- duration -->
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
 
         <!-- really crappy progress bar implementation -->
         <div class="navbar">
@@ -248,6 +249,7 @@
 
 
         <script>
+            // a basic queue data structure for maintaining songs
             class Queue {
                 constructor() {
                     this.items = [];
@@ -268,20 +270,23 @@
                 }
             }
 
-            var songQueue = new Queue();
-            var buttonQueue = new Queue();
-            var totalQueue = new Queue();
-            var songs = document.querySelectorAll('#audio');
-            var buttons = document.querySelectorAll('#play');
-            var lastSongIndex = -1;
+            var songQueue = new Queue();    // holds the current playing song to prevent songs from playing over each other
+            var buttonQueue = new Queue();  // holds the buttons for switching between play/pause buttons when a user interacts
+            var totalQueue = new Queue();   // holds the song IDs of all songs played by the user before leaving/reloading the page
+            var songs = document.querySelectorAll('#audio');    // list all audio players in the above HTML
+            var buttons = document.querySelectorAll('#play');   // list all buttons in the above HTML
+            var lastSongIndex = -1; // initialization
             
             function togglePlayPause(button) {
                 var currentSongIndex;
+                // find the index of the button the user pressed to handle the song (with the same index)
                 for (var i = 0; i < buttons.length; i++) {
                     if (buttons[i] == button) {
                         currentSongIndex = i;
                     }
                 }
+
+                // if the music is paused, play it, otherwise pause it (and deal with queues/attributes appropriately)
                 if (button.className == 'far fa-play-circle') {
                     button.className = 'far fa-pause-circle';
                     button.id = 'pause';
@@ -292,12 +297,14 @@
                         prevButton.className = 'far fa-play-circle';
                         prevButton.id = 'play';
                     }
-                    // if it's not the same song that was playing, restart it
+                    // if it's not the same song that was playing, restart it and add it to the total queue
                     if (lastSongIndex !== currentSongIndex) {
                         songs[currentSongIndex].currentTime = "0";
                         var songID = button.value;
                         totalQueue.enqueue(songID);
                     }
+
+                    // new standards require a promise be handled by JavaScript when playing a song
                     var promise = songs[currentSongIndex].play();
                     if (promise !== undefined) {
                         promise.then(_ => {
@@ -310,6 +317,8 @@
                     lastSongIndex = currentSongIndex;
                     songQueue.enqueue(songs[currentSongIndex]);
                     buttonQueue.enqueue(button);
+
+                    // when the song has ended, dequeue it from currently played and change its button type
                     songs[currentSongIndex].addEventListener('ended', function() {
                         songQueue.dequeue();
                         var prevButton = buttonQueue.dequeue();
@@ -326,6 +335,7 @@
                 
             }
 
+            // Progress bar of the currently playing song
             function updateBar(audio) {
                 var bar = document.getElementById("progressBar");
                 var currentTime = audio.currentTime;
@@ -334,11 +344,13 @@
                 bar.style.width = percentage + '%';
             }
 
+            // Converts durations from seconds to hours, minutes, and seconds
             var durations = document.querySelectorAll("#duration");
             for (var i = 0; i < durations.length; i++) {
                 durations[i].innerHTML = timeFormat(durations[i].innerHTML);
             }
 
+            // Turns seconds format into hours, minutes, and second format for shown duration
             function timeFormat(time) {   
                 // Hours, minutes and seconds
                 var hrs = ~~(time / 3600);
@@ -353,6 +365,8 @@
                 return ret;
             }
 
+            // Sends a POST request containing the IDs of the songs played to update
+            // the number of plays for each song when a user goes to leave the page
             window.onbeforeunload = function(event) {
                 var request = new XMLHttpRequest();
                 request.open("POST", "/library", true);
