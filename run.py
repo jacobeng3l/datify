@@ -62,15 +62,6 @@ def homepage():
     if 'user_id' not in session:
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
-    """
-    if request.method == 'POST':
-        if "library" in request.form:
-            return redirect(url_for('library'))
-        if "playlists" in request.form:
-            return redirect(url_for('playlists'))
-        if "friends" in request.form:
-            return redirect(url_for('friends'))
-    """
     data = {}
     # sql query to return all playlists a user has
     sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, has_playlist hp where hp.user_id={user_id} and hp.playlist_id=p.playlist_id".format(user_id=session['user_id'])
