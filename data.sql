@@ -458,9 +458,9 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 insert into in_playlist(playlist_id, song_id, added_by) values
   (2, 62, 2);
 
---insert into has_playlist(user_id, playlist_id) values 
+-- insert into has_playlist(user_id, playlist_id) values 
 --  (2, 2);
---insert into has_playlist(user_id, playlist_id) values 
+-- insert into has_playlist(user_id, playlist_id) values 
 --  (4, 2);
   
 insert into playlist(playlist_id, name, user_id) values 
@@ -475,7 +475,7 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 insert into in_playlist(playlist_id, song_id, added_by) values
   (3, 63, 1);
   
---insert into has_playlist(user_id, playlist_id) values 
+-- insert into has_playlist(user_id, playlist_id) values 
 --  (1, 3);
   
 insert into playlist(playlist_id, name, user_id) values 
@@ -518,13 +518,13 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 insert into in_playlist(playlist_id, song_id, added_by) values
   (4, 85, 4);
   
---insert into has_playlist(user_id, playlist_id) values 
+-- insert into has_playlist(user_id, playlist_id) values 
 --  (1, 4);
---insert into has_playlist(user_id, playlist_id) values 
+-- insert into has_playlist(user_id, playlist_id) values 
 --  (2, 4);
---insert into has_playlist(user_id, playlist_id) values 
+-- insert into has_playlist(user_id, playlist_id) values 
 --  (3, 4);
---insert into has_playlist(user_id, playlist_id) values 
+-- insert into has_playlist(user_id, playlist_id) values 
 --  (4, 4);
   
 insert into is_friend(follower, following) values
