@@ -64,7 +64,7 @@ def homepage():
         return redirect(url_for('login', error=error))
     data = {}
     # sql query to return all playlists a user has
-    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, where p.user_id=u.{user_id}".format(user_id=session['user_id'])
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
     data['playlists'] = playlists
     return render_template('homepage.html', data=data)
@@ -92,7 +92,7 @@ def library():
     songs = sql_query(sql)
     data['songs'] = songs
     # sql query to return all playlists a user has
-    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, where p.user_id=u.{user_id}".format(user_id=session['user_id'])
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
     data['playlists'] = playlists
     return render_template('library.html', data=data)
@@ -114,7 +114,7 @@ def playlists(name):
     songs = sql_query(sql)
     data['songs'] = songs
     # sql query to return all playlists a user has
-    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, where p.user_id=u.{user_id}".format(user_id=session['user_id'])
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
     data['playlists'] = playlists
     return render_template('playlists.html', data=data)
@@ -132,7 +132,7 @@ def friends():
     friends = sql_query(sql)
     data['friends'] = friends
     # sql query to return all playlists a user has
-    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, where p.user_id=u.{user_id}".format(user_id=session['user_id'])
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
     data['playlists'] = playlists
     return render_template('friends.html', data=data)
@@ -162,7 +162,7 @@ def search():
     results = sql_query(sql)
     data['results'] = results
     # sql query to return all playlists a user has
-    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, where p.user_id=u.{user_id}".format(user_id=session['user_id'])
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
     data['playlists'] = playlists
     return render_template('search.html', data=data)
