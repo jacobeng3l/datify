@@ -71,7 +71,12 @@ def homepage():
         if "friends" in request.form:
             return redirect(url_for('friends'))
     """
-    return render_template('homepage.html')
+    data = {}
+    # sql query to return all playlists a user has
+    sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p, user u, has_playlist hp where hp.user_id={user_id} and hp.playlist_id=p.playlist_id".format(user_id=session['user_id'])
+    playlists = sql_query(sql)
+    data['playlists'] = playlists
+    return render_template('homepage.html', data=data)
 
 # Song library page
 @app.route('/library', methods=['GET', 'POST'])
