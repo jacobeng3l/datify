@@ -306,7 +306,8 @@
                             // Autoplay was prevented.
                         });
                     }
-                    totalQueue.enqueue(songs[currentSongIndex]);
+                    var songID = button.value;
+                    totalQueue.enqueue(songID);
                     lastSongIndex = currentSongIndex;
                     songQueue.enqueue(songs[currentSongIndex]);
                     buttonQueue.enqueue(button);

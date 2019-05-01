@@ -294,8 +294,8 @@
                     }
                     // if it's not the same song that was playing, restart it
                     if (lastSongIndex !== currentSongIndex) {
-                        //songs[currentSongIndex].currentTime = "0";
-                        songs[currentSongIndex].load();
+                        songs[currentSongIndex].currentTime = "0";
+                        //songs[currentSongIndex].load();
                     }
                     var promise = songs[currentSongIndex].play();
                     if (promise !== undefined) {
@@ -305,7 +305,8 @@
                             // Autoplay was prevented.
                         });
                     }
-                    totalQueue.enqueue(songs[currentSongIndex]);
+                    var songID = button.value;
+                    totalQueue.enqueue(songID);
                     lastSongIndex = currentSongIndex;
                     songQueue.enqueue(songs[currentSongIndex]);
                     buttonQueue.enqueue(button);
