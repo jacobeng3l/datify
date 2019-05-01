@@ -1,5 +1,9 @@
 # datify
 A music streaming service built from the ground up during EECS 341, Introduction to Database Systems 
+The core functionality of this will be a user based system, which will include the ability to save and organize songs, specific to the user. Backend work such as song predictions based off of other users and searches already cached can also be implemented. Front-End will include a login system and a UI. Database will organize all users, songs, and playlists. This project provides many opportunities to develop further functionality, time permitting of course. 
+Users will land on a homepage, and after logging in, they will see a list of all saved songs. They will be able to create playlists of songs stored in their library, they will also be able to update and delete playlists they have already created. The database design will have to include saving audio files which may involve saving locations of audio files in a structured form. Songs will be related to artists, albums, and total plays. Web design will be a bit involved due to many pages and actions necessary for the user, as well as streaming audio. Backend design will have to handle the login service as well as a variety of calls necessary to manage everything. Finally the analytics will be an involved process, optimizing searches across songs, artists and albums. Recommendations will be complex due to prioritizing friends picks and song relations. 
+This project is ultimately rooted in database design and relations. Intelligent structure, querying, and maintenance will be key to a well performing application. 
+
 
 .gitignore file functions to ignore the venv folder so it is not uploaded
 
