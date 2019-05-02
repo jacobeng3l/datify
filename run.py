@@ -63,6 +63,8 @@ def homepage():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    sql = "select u.name from user u where u.user_id={user_id}".format(user_id=session['user_id'])
+    data['username'] = sql_query(sql)
     # sql query to return all playlists a user has
     sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
