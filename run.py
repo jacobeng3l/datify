@@ -160,7 +160,7 @@ def playlists(name):
     return render_template('playlists.html', data=data)
 
 # Friends page
-@app.route('/friends', methods=['GET', 'POST'])
+#@app.route('/friends', methods=['GET', 'POST'])
 def friends():
     if 'user_id' not in session:
         error = 'You are not logged in.'
