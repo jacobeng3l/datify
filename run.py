@@ -131,7 +131,7 @@ def playlists(name):
     if 'delete-playlist' in request.form:
         pname = str(request.form["delete-playlist"])
         # sql query to delete a user's playlist
-        sql = "delete from playlist p where p.name='{pname}' and p.user_id={user_id}".format(pname=pname, user_id=session['user_id'])
+        sql = "delete from playlist where name='{pname}' and user_id={user_id}".format(pname=pname, user_id=session['user_id'])
         sql_execute(sql)
         return redirect(url_for('library'))
     if 'pname' in request.form:
