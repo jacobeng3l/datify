@@ -335,8 +335,11 @@
 				to {transform: scale(1)}
 			}
         </style>
-	</head>
-	<body>
+    </head>
+    {% if data['error'] %}
+	<body onload="alert('That song is already in your library')">
+    {% else %}
+    <body>
         <!-- Navigation bar locked to the top of the screen -->
         <div class="navbar">
             <a href="{{ url_for('homepage') }}">Home</a>
