@@ -117,7 +117,7 @@ def libraryAddToPlaylist(name):
     pid = int(sql_query(sql)[0][0])
     sql = "insert into in_playlist (playlist_id, song_id, added_by) values ({pid}, {song_id}, {user_id})".format(pid=pid, song_id=song_id, user_id=session['user_id'])
     sql_execute(sql)
-    return redirect(url_for('library'))
+    return redirect(url_for('library/addToPlaylist/{name}'.format(name=name)))
 
 # User's playlists page
 @app.route('/playlists', defaults={'name': None}, methods=['GET', 'POST'])
