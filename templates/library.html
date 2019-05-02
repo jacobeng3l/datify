@@ -387,7 +387,7 @@
         {% else %}
         {% if data['addToPlaylist'] != None %}
         <h2 style="text-align: center; font-size: 20px">Select a song to add to '{{ data['addToPlaylist'] }}'</h2>
-        {% else %}
+        {% endif %}
         <table id="library">
             <tr>
                 <th></th>
@@ -431,7 +431,6 @@
             </tr>
             {% endfor %}
         </table>
-        {% endif %}
         {% endif %}
 
         <!-- really crappy progress bar implementation -->
