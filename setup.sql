@@ -112,11 +112,11 @@ create table in_playlist(
 
 -- a fact table for user's song plays
 create table plays(
+  plays_id int not null auto_increment primary key,
   user_id int not null,
   current_song_id int not null,
   next_song_id int, 
-  times datetime not null, 
-  PRIMARY KEY (user_id, current_song_id, times), 
+  times datetime not null,  
   FOREIGN KEY (user_id) REFERENCES user(user_id), 
   FOREIGN KEY (current_song_id) REFERENCES song(song_id),  
   FOREIGN KEY (next_song_id) REFERENCES song(song_id)
