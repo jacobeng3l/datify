@@ -65,8 +65,8 @@ where s.artist_id = ar.artist_id
   and u.user_id = 'USER'
 
 #select most recently played song
-select user_id, current_song_id, times
-from plays
+select p.user_id, p.current_song_id, p.times
+from plays p
 order by times desc
 limit 1
 
