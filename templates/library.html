@@ -405,7 +405,7 @@
                     <button onclick="togglePlayPause(this)" type="button" id="play" value="{{ song[0] }}" class='far fa-play-circle'></button> 
                 </td>
                 <td style="text-align: center">
-                    {% if not data['addToPlaylist'] %}
+                    {% if data['addToPlaylist'] == None %}
                     <form action="{{ url_for('library') }}" method="post">
                         <button type="submit" id="saved" name="delete-song" value="{{ song[0] }}" onmouseover="this.className='fas fa-times'" onmouseout="this.className='fas fa-check'" class='fas fa-check'></button>
                     </form>
