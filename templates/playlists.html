@@ -432,7 +432,7 @@
 			<form action="{{ url_for('library') }}", method="post">
 				<button type="submit" name="addto-playlist" value="{{ data['currentPlaylist'] }}"><i class="fas fa-plus"></i> Add to Playlist</button>
 			</form>
-			<form action="{{ url_for('playlist') }}", method="post">
+			<form action="{{ url_for('playlists') }}", method="post">
 				<button type="submit" name="delete-playlist" value="{{ data['currentPlaylist'] }}"><i class="fas fa-times"></i> Delete Playlist</button>
 			</form>
 		</div>
