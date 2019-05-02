@@ -103,6 +103,13 @@ def playlists(name):
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    # create and display a playlist
+    if 'delete-playlist' in request.form:
+        pname = str(request.form["delete-playlist"])
+        # sql query to delete a user's playlist
+        sql = "delete from playlist p where p.name='{pname}' and p.user_id={user_id}".format(pname=pname, user_id=session['user_id'])
+        sql_execute(sql)
+        return redirect(url_for('library'))
     if 'pname' in request.form:
         pname = str(request.form["pname"])
         pdesc = str(request.form["pdesc"])
@@ -113,11 +120,13 @@ def playlists(name):
         sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{pname}' and s.song_id=ip.song_id".format(pname=pname)
         songs = sql_query(sql)
         data['songs'] = songs
+        data['currentPlaylist'] = pname
     else:
         # sql query to return the songs of the requested playlist of a specific user
         sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{name}' and s.song_id=ip.song_id".format(name=name)
         songs = sql_query(sql)
         data['songs'] = songs
+        data['currentPlaylist'] = name
     # sql query to return all playlists a user has
     sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
