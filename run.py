@@ -78,7 +78,14 @@ def library():
     data = {}
     if "items" in request.form:
         for song_id in request.form["items"].split(','):
+            # sql query to increase play count by 1 for each song played
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
+            sql_execute(sql)
+            # sql query to update plays table with previous song
+            sql = "update plays set next_song={song_id} where current_song_id=(select current_song_id from plays p inner join user u on p.user_id=u.user_id where u.user_id={user_id} order by times desc limit 1)".format(song_id=song_id, user_id=session['user_id'])
+            sql_execute(sql)
+            # sql query to insert new song into plays
+            sql = "insert into plays(user_id, current_song_id, times) values({user_id}, {song_id}, current_timestamp)".format(song_id=song_id, user_id=session['user_id'])
             sql_execute(sql)
     if "add-song" in request.form:
         add_song_id = int(request.form["add-song"])
