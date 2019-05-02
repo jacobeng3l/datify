@@ -77,6 +77,7 @@ where user_id = 'USER'
   and current_song_id = 'CURRENT_SONG'
   and times = 'TIMES'
 
+#selecting songs in the user's library but not in a specific playlist
 Select s.song_id, s.name
 from song s, in_library il, user u
 where u.user_id = 'USER' and il.user_id = u.user_id and s.song_id = il.song_id and s.name not in (
