@@ -84,6 +84,31 @@ select s2.name from user u2, song s2, in_playlist ip2, playlist p
 where ip2.playlist_id = p.playlist_id and s2.song_id = ip2.song_id and p.name = 'PLAYLIST' and u2.user_id = 'USER' )
 
 
+#updating and inerting into plays
+update plays
+set next_song = 'SONG'
+where current_song = (select current_song from plays p inner join user u on p.user_id = u.user_id where u.user_id = 'USER' order by times desc limit 1)
+
+insert into plays(user_id, current_song, times)
+values('USER', 'SONG', current_timestamp)
+
+
+#selecting the 5 reccomended songs
+select s.name, s.explicit ,s.duration, s.song_id, ar.name, al.name
+from song s, artist ar, album al, user u, plays p
+where s.artist_id = ar.artist_id
+	and s.album_id = al.album_id
+	and u.user_id = 'USER'
+	p.next_song_id = s.song_id
+	and s.song_id not in (select s2.song_id 
+				from song s2, in_library il, user u2 
+				where s2.song_id = il.song_id
+				and u2.user_id = 'USER'
+				and u2.user_id = il.user_id)
+group by s.song_id
+having count(p.next_song_id) desc
+limit 5
+
 
 
 
