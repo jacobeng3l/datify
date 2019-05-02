@@ -89,7 +89,7 @@ def library():
         pname = str(request.form['addto-playlist'])
         data['addToPlaylist'] = pname
         # sql query to return all songs a user has in their library NOT in the current playlist
-        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, album al, in_library il, user u, artist ar where ar.artist_id=s.artist_id and u.user_id={user_id} and il.user_id=u.user_id and s.song_id=il.song_id and s.name not in (select s2.name from user u2, song s2, in_playlist ip2, playlist p where ip2.playlist_id=p.playlist_id and s2.song_id=ip2.song_id and p.name='{pname}' and u2.user_id = {user_id})".format(user_id=session['user_id'], pname=pname)
+        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, album al, in_library il, user u, artist ar where ar.artist_id=s.artist_id and u.user_id={user_id} and s.album_id=al.album_id and il.user_id=u.user_id and s.song_id=il.song_id and s.name not in (select s2.name from user u2, song s2, in_playlist ip2, playlist p where ip2.playlist_id=p.playlist_id and s2.song_id=ip2.song_id and p.name='{pname}' and u2.user_id = {user_id})".format(user_id=session['user_id'], pname=pname)
         songs = sql_query(sql)
         data['songs'] = songs
     else:
