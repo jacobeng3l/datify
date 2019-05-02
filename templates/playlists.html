@@ -217,7 +217,7 @@
 			}
 
 			/* Set a style for all buttons */
-			#id01 button {
+			#id01 button, #id02 button {
 				background-color: #0B304D;
 				color: white;
 				padding: 14px 20px;
@@ -228,10 +228,14 @@
 				border-radius: 4px;
 				transition: all 0.5s;
 				display: inline-block;
-				font-size: 14px
+				font-size: 14px;
 			}
 
-			#id01 button span {
+			#id02 button {
+				width: auto;
+			}
+
+			#id01 button span, #id02 button span {
 				cursor: pointer;
 				display: inline-block;
 				position: relative;
@@ -257,7 +261,7 @@
 				right: 0;
 			}
 
-			#id01 button:hover {
+			#id01 button:hover, #id02 button:hover {
 				opacity: 0.8;
 			}
 
@@ -332,13 +336,6 @@
 			@keyframes animatezoom {
 				from {transform: scale(0)} 
 				to {transform: scale(1)}
-			}
-
-			/* Change styles for span and cancel button on extra small screens */
-			@media screen and (max-width: 300px) {
-				.cancelbtn {
-				width: 100%;
-				}
 			}
 		</style>
 	</head>
@@ -428,7 +425,15 @@
                 <td id="duration">{{ song[6] }}</td> <!-- duration -->
             </tr>
             {% endfor %}
-        </table>
+		</table>
+		<div id="id02" style="text-align: center">
+			<form action="{{ url_for('playlist') }}", method="post">
+				<button type="submit" name="addto-playlist" value="{{ data['currentPlaylist'] }}"><i class="fas fa-plus"></i> Add to Playlist</button>
+			</form>
+			<form action="{{ url_for('playlist') }}", method="post">
+				<button type="submit" name="delete-playlist" value="{{ data['currentPlaylist'] }}"><i class="fas fa-times"></i> Delete Playlist</button>
+			</form>
+		</div>
         {% endif %}
 
         <!-- really crappy progress bar implementation -->
