@@ -115,6 +115,15 @@
 				background-color: #e9e9e9;
 			}
 
+			.navbar a#image {
+                float: left;
+				font-size: 16px;
+				color: black;
+                text-align: center;
+                padding: 0px 0px 0px 0px;
+				text-decoration: none;
+            }
+
 			.navbar a {
 				float: left;
 				font-size: 16px;
@@ -342,6 +351,7 @@
 	</head>
 	<body>
 		<div class="navbar">
+			<a id="image" href="{{ url_for('login') }}"><img type="image" src="/static/pic.png" name="pic" style="width: 52px"></a>
             <a href="{{ url_for('homepage') }}">Home</a>
 			<a href="{{ url_for('library') }}">Library</a>
 			<div class="dropdown">
