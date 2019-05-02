@@ -85,15 +85,39 @@ def library():
         # sql query for deleting a song in a user's library
         sql = "delete from in_library where user_id={user_id} and song_id={delete_song_id}".format(user_id=session['user_id'], delete_song_id=delete_song_id)
         sql_execute(sql)
-    # sql query to return all songs a user has in their library
-    sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, in_library, user, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and user.user_id={user_id} and user.user_id=in_library.user_id and in_library.song_id = song.song_id order by song.name".format(user_id=session['user_id'])
-    songs = sql_query(sql)
-    data['songs'] = songs
+    if "addto-playlist" in request.form:
+        pname = str(request.form['addto-playlist'])
+        data['addToPlaylist'] = pname
+        # sql query to return all songs a user has in their library NOT in the current playlist
+        sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song s, in_library il, user u where u.user_id = {user_id} and il.user_id = u.user_id and s.song_id = il.song_id and s.name not in (select s2.name from user u2, song s2, in_playlist ip2, playlist p where ip2.playlist_id = p.playlist_id and s2.song_id = ip2.song_id and p.name = '{pname}' and u2.user_id = {user_id})".format(user_id=session['user_id'], pname=pname)
+        songs = sql_query(sql)
+        data['songs'] = songs
+    else:
+        data['addToPlaylist'] = None
+        # sql query to return all songs a user has in their library
+        sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, in_library, user, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and user.user_id={user_id} and user.user_id=in_library.user_id and in_library.song_id = song.song_id order by song.name".format(user_id=session['user_id'])
+        songs = sql_query(sql)
+        data['songs'] = songs
+    
     # sql query to return all playlists a user has
     sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
     data['playlists'] = playlists
     return render_template('library.html', data=data)
+
+@app.route('/library/addToPlaylist/<name>', methods=['GET', 'POST'])
+def libraryAddToPlaylist(name):
+    if 'user_id' not in session:
+        error = 'You are not logged in.'
+        return redirect(url_for('login', error=error))
+    # sql query to add a given song to a playlist
+    song_id = str(request.form["add-song-to-playlist"])
+    # get the playlist ID
+    sql = "select p.playlist_id from playlist p where p.user_id={user_id} and p.name='{pname}".format(user_id=session['user_id'], pname=name)
+    pid = int(sql_query(sql))
+    sql = "insert into in_playlist (playlist_id, song_id, added_by) values ({pid}, {song_id}, {user_id})".format(pid=pid, song_id=song_id, user_id=session['user_id'])
+    sql_execute(sql)
+    return redirect(url_for('library'))
 
 # User's playlists page
 @app.route('/playlists', defaults={'name': None}, methods=['GET', 'POST'])
