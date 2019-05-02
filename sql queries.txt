@@ -111,6 +111,9 @@ having count(p.next_song_id) desc
 limit 5
 
 
-
+#find playlist id
+select p.playlist_id
+from playlist p
+where p.name = 'NAME' and u.user_id = 'USER'
 
 
