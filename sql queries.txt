@@ -131,3 +131,12 @@ where p.name = 'NAME' and p.user_id = 'USER'
 select count(1)
 from in_library
 where song_id = 'SONG' and user_id = 'USER'; 
+
+
+#selecting the most played song of a given user
+select s.song_id, s.name
+from plays p, song s, user u
+where s.song_id = p.current_song_id and u.user_id = p.user_id and u.user_id = 'USER'
+group by s.song_id
+order by count(p.current_song_id) desc
+limit 1
