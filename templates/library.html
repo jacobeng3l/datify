@@ -128,7 +128,7 @@
 			.dropdown {
 				float: left;
 				overflow: hidden;
-			}
+            }
 
 			.dropdown .dropbtn {
 				font-size: 16px;  
@@ -356,6 +356,9 @@
                     {% endfor %}
                     <a class="active" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New Playlist</a>
                 </div>
+            <div style="text-align: center">
+                <img type="image" src="/static/pic.png" name="pic">
+            </div>
             </div>
             <div class="search-container">
                 <form action="{{ url_for('search') }}" method="post">
