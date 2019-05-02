@@ -45,38 +45,55 @@ insert into plays(user_id, current_song_id, times, next_song_id) values
 -- user 2 plays a bunch of music
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 2);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 2, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 2);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 2, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 5);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 5, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 5);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 5, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 5);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 5, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 5);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 5, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 8);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 8, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 8);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 8, current_timestamp, 20);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 20, current_timestamp, 8);
+waitfor delay '00:00:05';
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (2, 8, current_timestamp, NULL);
 
