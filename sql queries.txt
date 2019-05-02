@@ -87,9 +87,9 @@ where ip2.playlist_id = p.playlist_id and s2.song_id = ip2.song_id and p.name = 
 #updating and inerting into plays
 update plays
 set next_song = 'SONG'
-where current_song = (select current_song from plays p inner join user u on p.user_id = u.user_id where u.user_id = 'USER' order by times desc limit 1)
+where current_song_id = (select current_song_id from plays p inner join user u on p.user_id = u.user_id where u.user_id = 'USER' order by times desc limit 1)
 
-insert into plays(user_id, current_song, times)
+insert into plays(user_id, current_song_id, times)
 values('USER', 'SONG', current_timestamp)
 
 
