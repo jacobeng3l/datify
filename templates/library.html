@@ -385,6 +385,9 @@
         {% if data['songs']|length == 0 %}
         <h2 style="text-align: center; font-size: 20px">No songs in your library.</h2>
         {% else %}
+        {% if data['addToPlaylist'] != None %}
+        <h2 style="text-align: center; font-size: 20px">Select a song to add to '{{ data['addToPlaylist'] }}'</h2>
+        {% else %}
         <table id="library">
             <tr>
                 <th></th>
