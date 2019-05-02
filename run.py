@@ -105,6 +105,7 @@ def library():
     data['playlists'] = playlists
     return render_template('library.html', data=data)
 
+@app.route('/library/addToPlaylist', defaults={'name': None}, methods=['GET', 'POST'])
 @app.route('/library/addToPlaylist/<name>', methods=['GET', 'POST'])
 def libraryAddToPlaylist(name):
     if 'user_id' not in session:
