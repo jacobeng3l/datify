@@ -87,7 +87,7 @@ def library():
             print(prev[0][0])
             print(prev[0][1])
             # sql query to update plays table with previous song
-            sql = "update plays set next_song_id={song_id} where current_song_id={prev} and times={times}".format(song_id=song_id, user_id=session['user_id'], prev=prev[0][0], times=prev[0][1])
+            sql = "update plays set next_song_id={song_id} where current_song_id={prev} and times='{times}'".format(song_id=song_id, user_id=session['user_id'], prev=prev[0][0], times=prev[0][1])
             sql_execute(sql)
             # sql query to insert new song into plays
             sql = "insert into plays(user_id, current_song_id, times) values({user_id}, {song_id}, current_timestamp)".format(song_id=song_id, user_id=session['user_id'])
