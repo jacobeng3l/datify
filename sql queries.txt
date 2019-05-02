@@ -127,3 +127,7 @@ from playlist p
 where p.name = 'NAME' and p.user_id = 'USER'
 
 
+#check if in library 
+select count(1)
+from in_library
+where song_id = 'SONG' and user_id = 'USER'; 
