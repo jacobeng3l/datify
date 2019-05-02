@@ -102,3 +102,7 @@ insert into plays(user_id, current_song_id, times, next_song_id) values
   (3, 19, current_timestamp, 20);
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (3, 20, current_timestamp, NULL);
+insert into plays(user_id, current_song_id, times, next_song_id) values
+  (4, 2, current_timestamp, NULL);
+insert into plays(user_id, current_song_id, times, next_song_id) values
+  (5, 2, current_timestamp, NULL);

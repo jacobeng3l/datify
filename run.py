@@ -63,6 +63,8 @@ def homepage():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    sql = "select u.name from user u where u.user_id={user_id}".format(user_id=session['user_id'])
+    data['username'] = sql_query(sql)[0][0]
     # sql query to return all playlists a user has
     sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
@@ -93,8 +95,8 @@ def library():
     if "add-song" in request.form:
         add_song_id = int(request.form["add-song"])
         # sql query to check if song to add is in library already
-        sql = "select count(1) from in_library where song_id={add_song_id} and user_id='{user_id}'".format(user_id=session['user_id'], add_song_id=add_song_id)
-        if sql_query(sql)[0][0]:
+        sql = "select count(1) from in_library where song_id={add_song_id} and user_id={user_id}".format(user_id=session['user_id'], add_song_id=add_song_id)
+        if not sql_query(sql)[0][0]:
             # sql query for adding a song to a user's library
             sql = "insert into in_library(user_id, song_id) values({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
             sql_execute(sql)
@@ -149,6 +151,15 @@ def playlists(name):
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    # delete a song in a user's playlist
+    if 'delete-song' in request.form:
+        # get the playlist ID
+        sql = "select p.playlist_id from playlist p where p.user_id={user_id} and p.name='{pname}'".format(user_id=session['user_id'], pname=name)
+        pid = int(sql_query(sql)[0][0])
+        song_id = int(request.form["delete-song"])
+        # delete the song from the playlist
+        sql = "delete from in_playlist where song_id={song_id} and added_by={user_id} and playlist_id={pid}".format(song_id=song_id, user_id=session['user_id'], pid=pid)
+        sql_execute(sql)
     # create and display a playlist
     if 'delete-playlist' in request.form:
         pname = str(request.form["delete-playlist"])
