@@ -113,7 +113,7 @@ def libraryAddToPlaylist(name):
     # sql query to add a given song to a playlist
     song_id = str(request.form["add-song-to-playlist"])
     # get the playlist ID
-    sql = "select p.playlist_id from playlist p where p.user_id={user_id} and p.name='{pname}".format(user_id=session['user_id'], pname=name)
+    sql = "select p.playlist_id from playlist p where p.user_id={user_id} and p.name='{pname}'".format(user_id=session['user_id'], pname=name)
     pid = int(sql_query(sql))
     sql = "insert into in_playlist (playlist_id, song_id, added_by) values ({pid}, {song_id}, {user_id})".format(pid=pid, song_id=song_id, user_id=session['user_id'])
     sql_execute(sql)
