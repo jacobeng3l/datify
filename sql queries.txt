@@ -51,10 +51,10 @@ values ('USER', 'FRIEND')
 insert into has_playlist(user_id, playlist_id)
 values('USER','PLAYLIST')
 
-#delete from library
+#delete song from library
 delete from in_library where song_id = 'SONG'
 
-#delete from playlist
+#delete song from playlist
 delete from in_playlist where song_id = 'SONG'
 
 #delete following
