@@ -142,13 +142,14 @@ def playlists(name):
         sql = "insert into playlist(user_id, name, description) values({user_id}, '{pname}', '{pdesc}')".format(user_id=session['user_id'], pname=pname, pdesc=pdesc)
         sql_execute(sql)
         # sql query to return the songs of the new playlist of a specific user (will be empty)
-        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{pname}' and s.song_id=ip.song_id".format(pname=pname)
+        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{pname}' and p.user_id={user_id} and s.song_id=ip.song_id".format(pname=pname, user_id=session['user_id'])
         songs = sql_query(sql)
         data['songs'] = songs
         data['currentPlaylist'] = pname
     else:
         # sql query to return the songs of the requested playlist of a specific user
-        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{name}' and s.song_id=ip.song_id".format(name=name)
+        ## NEED TO REQUEST SPECIFIC USER ##
+        sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, playlist p, in_playlist ip where s.artist_id=ar.artist_id and s.album_id=al.album_id and p.playlist_id=ip.playlist_id and p.name='{name}' and p.user_id={user_id} and s.song_id=ip.song_id".format(name=name, user_id=session['user_id'])
         songs = sql_query(sql)
         data['songs'] = songs
         data['currentPlaylist'] = name
