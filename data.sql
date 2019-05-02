@@ -529,39 +529,39 @@ insert into in_playlist(playlist_id, song_id, added_by) values
 
 -- create a new playlist for user 2
 insert into playlist(playlist_id, name, user_id) values 
-  (4, 'Sleepy Time', 2);
+  (5, 'Sleepy Time', 2);
 
 -- put songs into that new playlist for user 2
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 74, 2);
+  (5, 74, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 8, 2);
+  (5, 8, 2);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 85, 2);
+  (5, 85, 2);
 
 -- create a new playlist for user 3
 insert into playlist(playlist_id, name, user_id) values 
-  (4, 'Sleepy Time', 3);
+  (6, 'Sleepy Time', 3);
 
 -- put songs into that new playlist for user 3
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 74, 3);
+  (6, 74, 3);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 8, 3);
+  (6, 8, 3);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 85, 3);
+  (6, 85, 3);
 
 -- create a new playlist for user 4
 insert into playlist(playlist_id, name, user_id) values 
-  (4, 'Sleepy Time', 4);
+  (7, 'Sleepy Time', 4);
 
 -- put songs into that new playlist for user 4
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 74, 4);
+  (7, 74, 4);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 8, 4);
+  (7, 8, 4);
 insert into in_playlist(playlist_id, song_id, added_by) values
-  (4, 85, 4);
+  (7, 85, 4);
   
 -- insert into has_playlist(user_id, playlist_id) values 
 --  (1, 4);
