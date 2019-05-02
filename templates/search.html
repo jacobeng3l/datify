@@ -431,6 +431,46 @@
         </table>
         {% endif %}
 
+        <!-- Table for recommended songs from OLAP query -->
+        <h2 style="text-align: center; font-size: 20px">Recommendations based on what you listen to.</h2>
+        <table id="library">
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Title</th>
+                <th></th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Plays</th>
+                <th>Duration</th>
+            </tr>
+            {% for song in data['recommendation'] %}
+            <tr>
+                <td style="text-align: center">
+                    <audio id="audio" src="/static/{{ song[7] }}" type="audio/mpeg" ontimeupdate="updateBar(this)">
+                        Your browser does not support the audio element.
+                    </audio> 
+                    <button onclick="togglePlayPause(this)" type="button" id="play" value="{{ song[0] }}" class='far fa-play-circle'></button> 
+                </td>
+                <td style="text-align: center">
+                    <form action="{{ url_for('search') }}" method="post">
+                        <button type="submit" id="saved" name="add-song" value="{{ song[0] }}" class='fas fa-plus' onclick="toggleSave(this)"></button>
+                    </form>
+                </td>
+                <td>{{ song[2] }}</td> <!-- song -->
+                {% if song[1] == 'Yes' %}
+                <td><img src="https://i.stack.imgur.com/tkB9m.png"></td> <!-- explicit (display logo) -->
+                {% else %}
+                <td></td> <!-- not explicit -->
+                {% endif %}
+                <td>{{ song[8] }}</td> <!-- artist -->
+                <td>{{ song[4] }}</td> <!-- album -->
+                <td>{{ song[5] }}</td> <!-- plays -->
+                <td id="duration">{{ song[6] }}</td> <!-- duration -->
+            </tr>
+            {% endfor %}
+        </table>
+
         <!-- really crappy progress bar implementation -->
         <div class="botbar">
             <div class="timebar" style="text-align:center">
