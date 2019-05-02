@@ -80,6 +80,11 @@ def library():
         for song_id in request.form["items"].split(','):
             sql = "update song set song.plays = song.plays + 1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
+    if "add-song" in request.form:
+        add_song_id = int(request.form["add-song"])
+        # sql query for adding a song to a user's library
+        sql = "insert into in_library(user_id, song_id) values({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
+        sql_execute(sql)
     if "delete-song" in request.form:
         delete_song_id = int(request.form["delete-song"])
         # sql query for deleting a song in a user's library
@@ -188,11 +193,6 @@ def search():
         for song_id in request.form["items"].split(','):
             sql = "update song set song.plays=song.plays+1 where song.song_id={song_id}".format(song_id=song_id)
             sql_execute(sql)
-    if "add-song" in request.form:
-        add_song_id = int(request.form["add-song"])
-        # sql query for adding a song to a user's library
-        sql = "insert into in_library(user_id, song_id) values({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
-        sql_execute(sql)
     data['query'] = str(request.form['search'])
     clean_query = string_cleaner(str(request.form['search']))
     print(data['query'])
@@ -201,7 +201,7 @@ def search():
     results = sql_query(sql)
     data['results'] = results
     # sql query for selecting the 5 reccomended songs (OLAP)
-    sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, user u, plays p where s.artist_id=ar.artist_id	and s.album_id=al.album_id and u.user_id={user_id} and p.next_song_id=s.song_id	and p.current_song_id=(select p.current_song_id	from plays p order by times desc limit 1) and s.song_id not in (select s2.song_id from song s2, in_library il, user u2 where s2.song_id=il.song_id and u2.user_id={user_id} and u2.user_id = il.user_id) group by s.song_id order by count(p.next_song_id) desc limit 5".format(user_id=session['user_id'])
+    sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s, artist ar, album al, user u, plays p where s.artist_id=ar.artist_id	and s.album_id=al.album_id and u.user_id={user_id} and p.next_song_id=s.song_id	and p.current_song_id=(select p.current_song_id	from plays p where p.user_id={user_id} order by times desc limit 1) and s.song_id not in (select s2.song_id from song s2, in_library il, user u2 where s2.song_id=il.song_id and u2.user_id={user_id} and u2.user_id = il.user_id) group by s.song_id order by count(p.next_song_id) desc limit 5".format(user_id=session['user_id'])
     recommendation = sql_query(sql)
     data['recommendation'] = recommendation
     # sql query to return all playlists a user has
