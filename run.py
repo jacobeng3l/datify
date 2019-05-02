@@ -197,7 +197,7 @@ def search():
     clean_query = string_cleaner(str(request.form['search']))
     print(data['query'])
     # sql query to return search results
-    sql = "select song.song_id, song.explicit, song.name, song.album_id, album.name, song.plays, song.duration, song.file_loc, artist.name from song, album, artist where artist.artist_id=song.artist_id and song.album_id=album.album_id and song.name like '%{query}%' order by song.name".format(query=clean_query)
+    sql = "select s.song_id, s.explicit, s.name, s.album_id, al.name, s.plays, s.duration, s.file_loc, ar.name from song s INNER JOIN album al ON s.album_id=al.album_id INNER JOIN artist ar ON s.artist_id=ar.artist_id where al.name like '%{query}%' OR  ar.name like '%{query}%' OR s.name like '%{query}%'".format(query=clean_query)
     results = sql_query(sql)
     data['results'] = results
     # sql query for selecting the 5 reccomended songs (OLAP)
