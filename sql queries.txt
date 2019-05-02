@@ -29,6 +29,12 @@ Select s.song_id, s.name, s.plays, s.explicit, s.file_loc, s.album_id, s.duratio
 From song s, artist a
 where a.name like '%SEARCH%' ^ a.artist_id = s.artist_id
 
+#search query for songs, artists, albums
+Select s.song_id, s.name, ar.name, al.name, s.plays, s.explicit, s.file_loc, s.album_id, s.duration, s.num 
+From song s INNER JOIN album al ON s.album_id=al.album_id INNER JOIN artist ar ON s.artist_id = ar.artist_id 
+where al.name like '%a%' OR  ar.name like '%a%' OR s.name like '%a%';
+
+
 #insert into playlist
 insert into in_playlist (playlist_id, song_id, added_by)
 values ('PLAYLIST','SONG','USER')
