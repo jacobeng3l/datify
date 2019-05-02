@@ -257,7 +257,6 @@
 					<a class="active" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New Playlist</a>
 				</div>
 			</div>
-            <a href="{{ url_for('friends') }}">Friends</a>
             <div class="search-container">
                 <form action="{{ url_for('search') }}" method="post">
                     <input type="text" placeholder="Search" name="search" value="{{ request.form.search }}">
