@@ -100,14 +100,18 @@ from song s, artist ar, album al, user u, plays p
 where s.artist_id = ar.artist_id
 	and s.album_id = al.album_id
 	and u.user_id = 'USER'
-	p.next_song_id = s.song_id
+	and p.next_song_id = s.song_id
+	and p.current_song_id = (select p.current_song_id
+					from plays p
+					order by times desc
+					limit 1)
 	and s.song_id not in (select s2.song_id 
 				from song s2, in_library il, user u2 
 				where s2.song_id = il.song_id
 				and u2.user_id = 'USER'
 				and u2.user_id = il.user_id)
 group by s.song_id
-having count(p.next_song_id) desc
+order by count(p.next_song_id) desc
 limit 5
 
 
