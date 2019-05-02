@@ -105,7 +105,7 @@ create table in_playlist(
     date_added date,
     added_by int not null,
     PRIMARY KEY (playlist_id,song_id),
-    FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id),
+    FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id) ON DELETE CASCADE,
     FOREIGN KEY (song_id, added_by) REFERENCES in_library(song_id, user_id) ON DELETE CASCADE,
     FOREIGN KEY (added_by) REFERENCES user(user_id)
 );
