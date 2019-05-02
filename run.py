@@ -82,9 +82,15 @@ def library():
             sql_execute(sql)
     if "add-song" in request.form:
         add_song_id = int(request.form["add-song"])
-        # sql query for adding a song to a user's library
-        sql = "insert into in_library(user_id, song_id) values({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
-        sql_execute(sql)
+        # sql query to check if song to add is in library already
+        sql = "select count(1) from in_library where song_id={add_song_id} and user_id='{user_id}'".format(user_id=session['user_id'], add_song_id=add_song_id))
+        if sql_query(sql)[0][0]:
+            # sql query for adding a song to a user's library
+            sql = "insert into in_library(user_id, song_id) values({user_id}, {add_song_id})".format(user_id=session['user_id'], add_song_id=add_song_id)
+            sql_execute(sql)
+            data['error'] = False
+        else:
+            data['error'] = True
     if "delete-song" in request.form:
         delete_song_id = int(request.form["delete-song"])
         # sql query for deleting a song in a user's library
