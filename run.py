@@ -63,8 +63,12 @@ def homepage():
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    # get user's name from ID
     sql = "select u.name from user u where u.user_id={user_id}".format(user_id=session['user_id'])
     data['username'] = sql_query(sql)[0][0]
+    # get user's most played song
+    sql = "select s.song_id, s.name from plays p, song s, user u where s.song_id=p.current_song_id and u.user_id=p.user_id and u.user_id={user_id} group by s.song_id order by count(p.current_song_id) desc limit 1".format(user_id=session['user_id'])
+    data['mostplayed'] = sql_query(sql)[0][1]
     # sql query to return all playlists a user has
     sql = "select p.playlist_id, p.name, p.date_created, p.description, p.plays from playlist p where p.user_id={user_id}".format(user_id=session['user_id'])
     playlists = sql_query(sql)
