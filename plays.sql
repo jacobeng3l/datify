@@ -99,6 +99,6 @@ insert into plays(user_id, current_song_id, times, next_song_id) values
 
 -- user 3 plays a song
 insert into plays(user_id, current_song_id, times, next_song_id) values
-  (3, 19, current_timestamp, NULL);
+  (3, 19, current_timestamp, 20);
 insert into plays(user_id, current_song_id, times, next_song_id) values
   (3, 20, current_timestamp, NULL);
