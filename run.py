@@ -149,6 +149,15 @@ def playlists(name):
         error = 'You are not logged in.'
         return redirect(url_for('login', error=error))
     data = {}
+    # delete a song in a user's playlist
+    if 'delete-song' in request.form:
+        # get the playlist ID
+        sql = "select p.playlist_id from playlist p where p.user_id={user_id} and p.name='{pname}'".format(user_id=session['user_id'], pname=name)
+        pid = int(sql_query(sql)[0][0])
+        song_id = int(request.form["delete-song"])
+        # delete the song from the playlist
+        sql = "delete from in_playlist where song_id={song_id} and added_by={user_id} and playlist_id={pid}".format(song_id=song_id, user_id=session['user_id'], pid=pid)
+        sql_execute(sql)
     # create and display a playlist
     if 'delete-playlist' in request.form:
         pname = str(request.form["delete-playlist"])
