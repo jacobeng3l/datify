@@ -344,6 +344,7 @@
     {% endif %}
         <!-- Navigation bar locked to the top of the screen -->
         <div class="navbar">
+            <a href="{{ url_for('login') }}"><img type="image" src="/static/pic.png" name="pic" style="width: 5%"></a>
             <a href="{{ url_for('homepage') }}">Home</a>
 			<a class="active" href="{{ url_for('library') }}">Library</a>
 			<div class="dropdown">
@@ -356,9 +357,6 @@
                     {% endfor %}
                     <a class="active" onclick="document.getElementById('id01').style.display='block'"><i class="fas fa-plus"></i> New Playlist</a>
                 </div>
-            </div>
-            <div style="text-align: center">
-                <img type="image" src="/static/pic.png" name="pic" style="width: 7%">
             </div>
             <div class="search-container">
                 <form action="{{ url_for('search') }}" method="post">
