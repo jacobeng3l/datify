@@ -245,10 +245,14 @@
 				to {transform: scale(1)}
 			}
 
-			/* Change styles for span and cancel button on extra small screens */
-			@media screen and (max-width: 300px) {
+			/* Change styles for cancel button and modal on extra small screens */
+			@media only screen and (max-width: 600px) {
 				.cancelbtn {
-				width: 100%;
+				  width: 100%;
+				}
+		
+				.modal-content {
+				  width: 95%; /* Could be more or less, depending on screen size */
 				}
 			}
 		</style>
