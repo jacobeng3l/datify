@@ -36,15 +36,6 @@ create table playlist(
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
--- creates an album entity
-create table album(
-    album_id int not null auto_increment primary key,
-    name varchar(255) not null,
-    date_published date,
-    image varchar(255),
-    description varchar(255)
-);
-
 -- creates an artist entity
 create table artist(
     artist_id int not null auto_increment primary key,
@@ -53,6 +44,17 @@ create table artist(
     image varchar(255),
     bio varchar(255),
     plays int DEFAULT 0
+);
+
+-- creates an album entity
+create table album(
+    album_id int not null auto_increment primary key,
+    artist_id int not null,
+    name varchar(255) not null,
+    date_published date,
+    image varchar(255),
+    description varchar(255),
+    FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
 -- creates a song entity
