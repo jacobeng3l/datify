@@ -85,6 +85,8 @@ def string_cleaner(phrase):
     for i in phrase:
         if i == '\'':
             new = new + "\\\'"
+	elif i == '\\':
+            new = new + "\\\\"
         else:
             new = new + i
     return new
