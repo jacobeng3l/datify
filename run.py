@@ -246,7 +246,7 @@ def string_cleaner(phrase):
     for i in phrase:
         if i == '\'':
             new = new + "\\\'"
-        if i == '\\':
+        elif i == '\\':
             new = new + "\\\\"
         else:
             new = new + i
