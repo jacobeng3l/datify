@@ -1,7 +1,6 @@
 -- Initial Data Input 
 -- insert data into database
 
-
 -- create initial user
 insert into user(user_id, email, name, password) values 
     (1, 'abc1@case.edu', 'Alex', 'password');
